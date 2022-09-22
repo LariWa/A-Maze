@@ -177,7 +177,8 @@ MonoBehaviour:
     prefab: {fileID: 915653536297429085, guid: 7ae5b730cb0831544aea314f8d65735e, type: 3}
   placementBlocks:
   - {fileID: 8509683413951879789, guid: 53b8c2c335e590942aa19516b4a8896b, type: 3}
-  moveTime: 1
+  - {fileID: 915653536297429085, guid: 7ae5b730cb0831544aea314f8d65735e, type: 3}
+  moveTime: 0.5
 --- !u!1 &483357474
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

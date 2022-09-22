@@ -62,9 +62,24 @@ public class MazeGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
-            moveInPositiveDir(false, 1, 0);
+            //only for testing, needs to be improved once we know how we do the interaction (table/tablet..)
+            Vector3 screenPos = Input.mousePosition;
+            screenPos.z = UnityEngine.Camera.main.transform.position.y;
+            Vector3 pos = UnityEngine.Camera.main.ScreenToWorldPoint(screenPos);
+            var column = (int)((pos.x + blockWidth / 2) / blockWidth);
+            var row = (int)((pos.z + blockWidth / 2) / blockWidth);
+            var newBlockIdx = UnityEngine.Random.Range(0, placementBlocks.Length ); //should be selected by the user in the future
+            if (pos.x + blockWidth / 2 < 0 && row < columnLength)//move row right
+                moveInPositiveDir(true, row, newBlockIdx);
+            else if ((pos.x + blockWidth / 2) / blockWidth > rowLength && row < columnLength) //move row left
+                moveInNegativeDir(true, row, newBlockIdx);
+            else if (pos.z + blockWidth / 2 < 0 && column < rowLength)//move column up
+                moveInPositiveDir(false, column, newBlockIdx);
+            else if (((pos.z + blockWidth / 2) / blockWidth > columnLength) && (column < rowLength))    //move column down
+                moveInNegativeDir(false, column, newBlockIdx);
         }
     }
     void moveInPositiveDir(bool isRow, int idx, int newBlockId)//right or up
@@ -81,9 +96,9 @@ public class MazeGenerator : MonoBehaviour
                 if (isRow) mazeBlocks[i + 1, idx] = block;
                 else mazeBlocks[idx, i + 1] = block;
             }
-            placeNewBlock(idx, isRow, false, newBlockId);
-
         }
+        placeNewBlock(idx, isRow, false, newBlockId);
+
     }
     void moveInNegativeDir(bool isRow, int idx, int newBlockId)//left or down
     {
@@ -99,9 +114,9 @@ public class MazeGenerator : MonoBehaviour
                 if (isRow) mazeBlocks[i - 1, idx] = block;
                 else mazeBlocks[idx, i - 1] = block;
             }
-             placeNewBlock(idx, isRow, true, newBlockId);
-
         }
+        placeNewBlock(idx, isRow, true, newBlockId);
+
     }
     bool isLastBlock(bool isRow, int idx, bool moveLeft)
     {
@@ -117,11 +132,11 @@ public class MazeGenerator : MonoBehaviour
         else pos = new Vector3(idx * blockWidth, 0, moveLeft ? columnLength * blockWidth : -blockWidth);
         var newBlock = Instantiate(placementBlocks[newBlockId], pos, Quaternion.identity);
         var moveVector = inRow ? new Vector3((moveLeft ? -1 : 1) * blockWidth, 0, 0) : new Vector3(0, 0, (moveLeft ? -1 : 1) * blockWidth);
-        var tween = newBlock.transform.DOMove(newBlock.transform.position + moveVector, 1);
+        var tween = newBlock.transform.DOMove(newBlock.transform.position + moveVector, moveTime);
         tween.OnComplete(() =>
         {
-            if (inRow) mazeBlocks[moveLeft ? rowLength-1 : 0, idx] = newBlock.transform;
-            else mazeBlocks[idx, moveLeft ? columnLength-1 : 0] = newBlock.transform;
+            if (inRow) mazeBlocks[moveLeft ? rowLength - 1 : 0, idx] = newBlock.transform;
+            else mazeBlocks[idx, moveLeft ? columnLength - 1 : 0] = newBlock.transform;
         });
     }
 
