@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MazeBlock : MonoBehaviour
 {
-    
+    public int id;
     // Start is called before the first frame update
     void Start()
     {

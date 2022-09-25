@@ -8,9 +8,12 @@ public class BaseClient : MonoBehaviour
 {
     public NetworkDriver driver;
     protected NetworkConnection connection;
+    public static BaseClient instance { get; private set; }
+
     private void Start()
     {
         Init();
+        instance = this;
     }
     private void Update()
     {
@@ -74,6 +77,9 @@ public class BaseClient : MonoBehaviour
         {
             case OpCode.CHAT_MESSAGE: msg = new Net_ChatMessage(stream); break;
             case OpCode.POSITION_MSG: msg = new Net_PositionMsg(stream); break;
+            case OpCode.MAZE_GENERATION_MSG: msg = new Net_MazeGenerationMsg(stream); break;
+            case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
+
 
             default:
                 Debug.Log("message received had no OpCode");

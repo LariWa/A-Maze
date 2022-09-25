@@ -8,9 +8,10 @@ public class BaseServer : MonoBehaviour
 {
     public NetworkDriver driver;
     protected NativeList<NetworkConnection> connections;
-
+    public static BaseServer instance { get; private set; }
     private void Start()
     {
+        instance = this;
         Init();
     }
     private void Update()
@@ -59,6 +60,7 @@ public class BaseServer : MonoBehaviour
         {
             connections.Add(c);
             Debug.Log("Accepted a connection");
+            MazeGenerator.instance.sendToClient();
         }
     }
     protected virtual void UpdateMessagePump()
@@ -89,6 +91,7 @@ public class BaseServer : MonoBehaviour
         {
             case OpCode.CHAT_MESSAGE: msg = new Net_ChatMessage(stream); break;
             case OpCode.POSITION_MSG: msg = new Net_PositionMsg(stream); break;
+            case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
 
             default:
                 Debug.Log("message received had no OpCode");
