@@ -3,34 +3,35 @@ using UnityEngine;
 using Unity.Networking.Transport;
 using System.Collections.Generic;
 using Unity.Collections;
+using System;
 
 public class BaseClient : MonoBehaviour
 {
     public NetworkDriver driver;
     protected NetworkConnection connection;
+    public bool isConnected;
     public static BaseClient instance { get; private set; }
 
     private void Start()
     {
-        Init();
         instance = this;
     }
     private void Update()
     {
+        if(connection.IsCreated)
         UpdateClient();
     }
     private void OnDestroy()
     {
         Shutdown();
     }
-    public virtual void Init()
+    public virtual void Init(string ip)
     {
         //initialize driver
         driver = NetworkDriver.Create();
         connection = default(NetworkConnection);
         NetworkEndPoint endpoint;
-        NetworkEndPoint.TryParse("192.168.0.111", 5522, out endpoint); //anyone can connect
-                                                                       // endpoint.Port = 5522;
+        NetworkEndPoint.TryParse(ip, 5522, out endpoint); //anyone can connect
         connection = driver.Connect(endpoint);
     }
     public virtual void UpdateClient()
@@ -45,6 +46,7 @@ public class BaseClient : MonoBehaviour
         if (!connection.IsCreated)
         {
             Debug.Log("Lost connection to server");
+            isConnected = false;
         }
     }
     protected virtual void UpdateMessagePump()
@@ -59,12 +61,14 @@ public class BaseClient : MonoBehaviour
             }
             else if (cmd == NetworkEvent.Type.Connect)
             {
+                isConnected = true;
                 Debug.Log("connected to server");
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
                 Debug.Log("Client got disconnected from server");
                 connection = default(NetworkConnection);
+                isConnected = false;
             }
         }
     }

@@ -31,13 +31,16 @@ public class MazeGenerator : MonoBehaviour
             GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.identity);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
+
+        //place camera
+        UnityEngine.Camera.main.transform.position = new Vector3(rowLength / 2 * blockWidth, UnityEngine.Camera.main.transform.position.y, columnLength / 2 * blockWidth);
     }
    
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&BaseClient.instance.isConnected)
         {
             //only for testing, needs to be improved once we know how we do the interaction (table/tablet..)
             Vector3 screenPos = Input.mousePosition;
