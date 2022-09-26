@@ -19,7 +19,7 @@ public class MazeGenerator : MonoBehaviour
         instance = this;
 
     }
-    public void generateMaze(int columnLength, int rowLength, int blockWidth, int[] blockIdxs)
+    public void generateMaze(int columnLength, int rowLength, int blockWidth, int[] blockIdxs, int [] blockRotations)
     {
         this.columnLength = columnLength;
         this.rowLength = rowLength;
@@ -28,7 +28,7 @@ public class MazeGenerator : MonoBehaviour
         //place blocks on grid
         for (int i = 0; i < columnLength * rowLength; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.identity);
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i] * 90, 0));
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 

@@ -50,16 +50,20 @@ public class MazeGenerator : MonoBehaviour
 
         randomizeArray(allMazeBlocks);
 
-        //save msg for client
-        var netMsgBlockArray = allMazeBlocks.ToList().ConvertAll<int>(elem => elem.GetComponent<MazeBlock>().id).ToArray();
-        msg = new Net_MazeGenerationMsg(columnLength, rowLength, blockWidth, netMsgBlockArray);
+
+       var blockRotations = new int[rowLength* columnLength];
 
         //place blocks on grid
         for (int i = 0; i < columnLength * rowLength; i++)
         {
-            GameObject block = Instantiate(allMazeBlocks[i], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.identity);
+            int rot = UnityEngine.Random.Range(0, 3);
+            blockRotations[i] = rot;
+            GameObject block = Instantiate(allMazeBlocks[i], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, rot*90, 0));
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
+        //save msg for client
+        var netMsgBlockArray = allMazeBlocks.ToList().ConvertAll<int>(elem => elem.GetComponent<MazeBlock>().id).ToArray();
+        msg = new Net_MazeGenerationMsg(columnLength, rowLength, blockWidth, netMsgBlockArray, blockRotations);
 
     }
     void randomizeArray(GameObject[] array)

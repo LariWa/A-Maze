@@ -14,6 +14,7 @@ public class Net_MazeGenerationMsg : NetMessage
     public int blockWidth { set; get; }
 
     public int[] arrayOfBlockIdx { set; get; }
+    public int[] blockRotations { set; get; }
 
 
     public Net_MazeGenerationMsg()
@@ -25,13 +26,15 @@ public class Net_MazeGenerationMsg : NetMessage
         Code = OpCode.MAZE_GENERATION_MSG;
         Deserialize(reader);
     }
-    public Net_MazeGenerationMsg(int columnLength, int rowLength, int blockWidth, int[] arrayOfBlockIdx)
+    public Net_MazeGenerationMsg(int columnLength, int rowLength, int blockWidth, int[] arrayOfBlockIdx, int[] blockRotations)
     {
         Code = OpCode.MAZE_GENERATION_MSG;
         this.columnLength = columnLength;
         this.rowLength = rowLength;
         this.blockWidth = blockWidth;
         this.arrayOfBlockIdx = arrayOfBlockIdx;
+        this.blockRotations = blockRotations;
+
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
@@ -40,6 +43,7 @@ public class Net_MazeGenerationMsg : NetMessage
         writer.WriteInt(rowLength);
         writer.WriteInt(blockWidth);
         writer.WriteFixedString512(string.Join(",", arrayOfBlockIdx));
+        writer.WriteFixedString512(string.Join(",", blockRotations));
 
 
     }
@@ -50,6 +54,7 @@ public class Net_MazeGenerationMsg : NetMessage
         rowLength = reader.ReadInt();
         blockWidth = reader.ReadInt();
         arrayOfBlockIdx = Array.ConvertAll(("" + reader.ReadFixedString512()).Split(','), int.Parse);
+        blockRotations = Array.ConvertAll(("" + reader.ReadFixedString512()).Split(','), int.Parse);
     }
     public override void ReceivedOnServer()
     {
