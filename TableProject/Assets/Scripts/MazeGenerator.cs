@@ -7,19 +7,20 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    private int columnLength, rowLength, blockWidth;   
+    private int columnLength, rowLength, blockWidth;
     public GameObject[] mazeBlocksToGenerate; //index needs to match given Id in VR scene!!
     Transform[,] mazeBlocks;
     public float moveTime = 0.5f;
     public static MazeGenerator instance { get; private set; }
-
+    public GameObject btnPrefab;
+    public Transform mazeUI;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
 
     }
-    public void generateMaze(int columnLength, int rowLength, int blockWidth, int[] blockIdxs, int [] blockRotations)
+    public void generateMaze(int columnLength, int rowLength, int blockWidth, int[] blockIdxs, int[] blockRotations)
     {
         this.columnLength = columnLength;
         this.rowLength = rowLength;
@@ -34,30 +35,63 @@ public class MazeGenerator : MonoBehaviour
 
         //place camera
         UnityEngine.Camera.main.transform.position = new Vector3(rowLength / 2 * blockWidth, UnityEngine.Camera.main.transform.position.y, columnLength / 2 * blockWidth);
+
+        //place btns 
+        //for rows
+        for (int i = 1; i < columnLength - 1; i++)
+        {
+            //right
+            createBtn(blockWidth, new Vector3(-blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, -90), i, true, false);
+            //left
+            createBtn(blockWidth, new Vector3(rowLength * blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, 90), i, true, true);
+
+
+        }
+        //for columns
+        for (int i = 1; i < rowLength - 1; i++)
+        {
+            //up
+            createBtn(blockWidth, new Vector3(i * blockWidth, 0, -blockWidth), Quaternion.Euler(90, 0, 0), i, false, false);
+            //down
+            createBtn(blockWidth, new Vector3(i * blockWidth, 0, columnLength * blockWidth), Quaternion.Euler(90, 0, 180), i, false, true);
+
+
+        }
+
     }
-   
+    void createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
+    {
+        var btn = Instantiate(btnPrefab, pos, rot, mazeUI);
+        btn.transform.localScale = Vector3.one * blockWidth;
+        btn.GetComponent<moveBtn>().Init(index, isRow, moveNegDir);
+    }
+    public void move(int index, bool isRow, bool moveNegDir)
+    {
+        if (moveNegDir) moveInNegativeDir(isRow, index, 0);
+        else moveInPositiveDir(isRow, index, 0);
+    }
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0)&&BaseClient.instance.isConnected)
-        {
-            //only for testing, needs to be improved once we know how we do the interaction (table/tablet..)
-            Vector3 screenPos = Input.mousePosition;
-            screenPos.z = UnityEngine.Camera.main.transform.position.y;
-            Vector3 pos = UnityEngine.Camera.main.ScreenToWorldPoint(screenPos);
-            var column = (int)((pos.x + blockWidth / 2) / blockWidth);
-            var row = (int)((pos.z + blockWidth / 2) / blockWidth);
-            var newBlockIdx = UnityEngine.Random.Range(0, mazeBlocksToGenerate.Length); //should be selected by the user in the future
-            if (pos.x + blockWidth / 2 < 0 && row < columnLength)//move row right
-                moveInPositiveDir(true, row, newBlockIdx);
-            else if ((pos.x + blockWidth / 2) / blockWidth > rowLength && row < columnLength) //move row left
-                moveInNegativeDir(true, row, newBlockIdx);
-            else if (pos.z + blockWidth / 2 < 0 && column < rowLength)//move column up
-                moveInPositiveDir(false, column, newBlockIdx);
-            else if (((pos.z + blockWidth / 2) / blockWidth > columnLength) && (column < rowLength))    //move column down
-                moveInNegativeDir(false, column, newBlockIdx);
-        }
+        //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)
+        //{
+        //    //only for testing, needs to be improved once we know how we do the interaction (table/tablet..)
+        //    Vector3 screenPos = Input.mousePosition;
+        //    screenPos.z = UnityEngine.Camera.main.transform.position.y;
+        //    Vector3 pos = UnityEngine.Camera.main.ScreenToWorldPoint(screenPos);
+        //    var column = (int)((pos.x + blockWidth / 2) / blockWidth);
+        //    var row = (int)((pos.z + blockWidth / 2) / blockWidth);
+        //    var newBlockIdx = UnityEngine.Random.Range(0, mazeBlocksToGenerate.Length); //should be selected by the user in the future
+        //    if (pos.x + blockWidth / 2 < 0 && row < columnLength)//move row right
+        //        moveInPositiveDir(true, row, newBlockIdx);
+        //    else if ((pos.x + blockWidth / 2) / blockWidth > rowLength && row < columnLength) //move row left
+        //        moveInNegativeDir(true, row, newBlockIdx);
+        //    else if (pos.z + blockWidth / 2 < 0 && column < rowLength)//move column up
+        //        moveInPositiveDir(false, column, newBlockIdx);
+        //    else if (((pos.z + blockWidth / 2) / blockWidth > columnLength) && (column < rowLength))    //move column down
+        //        moveInNegativeDir(false, column, newBlockIdx);
+        //}
     }
     void moveInPositiveDir(bool isRow, int idx, int newBlockId)//right or up
     {
@@ -81,7 +115,7 @@ public class MazeGenerator : MonoBehaviour
     }
     void moveInNegativeDir(bool isRow, int idx, int newBlockId)//left or down
     {
-        Net_MoveMazeMsg msg = new Net_MoveMazeMsg(idx, isRow, true,newBlockId);
+        Net_MoveMazeMsg msg = new Net_MoveMazeMsg(idx, isRow, true, newBlockId);
         BaseClient.instance.SendToServer(msg);
 
         for (int i = 0; i < (isRow ? rowLength : columnLength); i++)
@@ -100,25 +134,25 @@ public class MazeGenerator : MonoBehaviour
         placeNewBlock(idx, isRow, true, newBlockId);
 
     }
-    bool isLastBlock(bool isRow, int idx, bool moveLeft)
+    bool isLastBlock(bool isRow, int idx, bool moveNegDirt)
     {
-        if (isRow) return idx == rowLength - 1 && !moveLeft || idx == 0 && moveLeft;
-        else return idx == columnLength - 1 && !moveLeft || idx == 0 && moveLeft;
+        if (isRow) return idx == rowLength - 1 && !moveNegDirt || idx == 0 && moveNegDirt;
+        else return idx == columnLength - 1 && !moveNegDirt || idx == 0 && moveNegDirt;
     }
 
-    void placeNewBlock(int idx, bool inRow, bool moveLeft, int newBlockId)
+    void placeNewBlock(int idx, bool inRow, bool moveNegDirt, int newBlockId)
 
     {
         Vector3 pos;
-        if (inRow) pos = new Vector3(moveLeft ? rowLength * blockWidth : -blockWidth, 0, idx * blockWidth);
-        else pos = new Vector3(idx * blockWidth, 0, moveLeft ? columnLength * blockWidth : -blockWidth);
+        if (inRow) pos = new Vector3(moveNegDirt ? rowLength * blockWidth : -blockWidth, 0, idx * blockWidth);
+        else pos = new Vector3(idx * blockWidth, 0, moveNegDirt ? columnLength * blockWidth : -blockWidth);
         var newBlock = Instantiate(mazeBlocksToGenerate[newBlockId], pos, Quaternion.identity);
-        var moveVector = inRow ? new Vector3((moveLeft ? -1 : 1) * blockWidth, 0, 0) : new Vector3(0, 0, (moveLeft ? -1 : 1) * blockWidth);
+        var moveVector = inRow ? new Vector3((moveNegDirt ? -1 : 1) * blockWidth, 0, 0) : new Vector3(0, 0, (moveNegDirt ? -1 : 1) * blockWidth);
         var tween = newBlock.transform.DOMove(newBlock.transform.position + moveVector, moveTime);
         tween.OnComplete(() =>
         {
-            if (inRow) mazeBlocks[moveLeft ? rowLength - 1 : 0, idx] = newBlock.transform;
-            else mazeBlocks[idx, moveLeft ? columnLength - 1 : 0] = newBlock.transform;
+            if (inRow) mazeBlocks[moveNegDirt ? rowLength - 1 : 0, idx] = newBlock.transform;
+            else mazeBlocks[idx, moveNegDirt ? columnLength - 1 : 0] = newBlock.transform;
         });
     }
 
