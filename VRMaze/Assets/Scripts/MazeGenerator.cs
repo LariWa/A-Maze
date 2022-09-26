@@ -30,21 +30,25 @@ public class MazeGenerator : MonoBehaviour
         mazeBlocks = new Transform[rowLength, columnLength];
         //create array with all the blocks we want to use
         var allMazeBlocks = new GameObject[columnLength * rowLength];
-        int idx = 0;
+        int idxAllMazeBlocks = 0;
+        int idxBlockDictionary = 0;
         foreach (MazeBlockPrefab mazeBlock in mazeBlocksToGenerate)
         {
+            var blockScript = mazeBlock.prefab.AddComponent<MazeBlock>();
+            blockScript.id = idxBlockDictionary;
+            idxBlockDictionary++;
             for (int i = 0; i < mazeBlock.quantity; i++)
             {
-                if (idx < columnLength * rowLength)
+                if (idxAllMazeBlocks < columnLength * rowLength)
                 {
-                    allMazeBlocks[idx] = mazeBlock.prefab;
-                    idx++;
+                    allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
+                    idxAllMazeBlocks++;
                 }
                 else
                     Debug.LogWarning("number of maze blocks is bigger than cell amount, please fix!");
             }
         }
-        if (idx < columnLength * rowLength)
+        if (idxAllMazeBlocks < columnLength * rowLength)
             Debug.LogWarning("number of maze blocks is smaller than cell amount, please fix!");
 
 
