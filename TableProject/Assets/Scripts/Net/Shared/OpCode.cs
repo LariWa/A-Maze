@@ -4,6 +4,7 @@ public enum OpCode
     POSITION_MSG = 2,
     MAZE_GENERATION_MSG = 3,
     MOVE_MAZE_MSG = 4,
+    RESTART_MSG=5
 
 };
 public enum objTypeCode

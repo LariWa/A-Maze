@@ -29,14 +29,13 @@ public class MazeGenerator : MonoBehaviour
         this.rowLength = rowLength;
         this.blockWidth = blockWidth;
         mazeBlocks = new Transform[rowLength, columnLength];
-        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity).transform;
-        Debug.Log(playerBlock.transform.Find("Player"));
+        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, this.gameObject.transform).transform;
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
-        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity).transform;
+        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, this.gameObject.transform).transform;
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength-1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0));
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0), this.gameObject.transform);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
@@ -64,7 +63,7 @@ public class MazeGenerator : MonoBehaviour
 
         //place next block
         nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
-        nextBlock = Instantiate(mazeBlocksToGenerate[1], nextBlockPos, Quaternion.identity).transform;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.identity, this.gameObject.transform).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
 
     }
@@ -87,7 +86,22 @@ public class MazeGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("restart");
+             // destroy maze
+            for (var i = 0; i < this.transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+            //destroy maze btns
+            for (var i = 0; i < mazeUI.childCount; i++)
+            {
+                Destroy(mazeUI.GetChild(i).gameObject);
+            }
+            BaseClient.instance.SendToServer(new Net_RestartMsg());
 
+        }
         //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)
         //{
         //    //only for testing, needs to be improved once we know how we do the interaction (table/tablet..)

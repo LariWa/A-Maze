@@ -27,10 +27,13 @@ public class MazeGenerator : MonoBehaviour
     void Start()
     {
         instance = this;
-
+        generateMaze();
+    }
+    void generateMaze()
+    {
         mazeBlocks = new Transform[rowLength, columnLength];
         //create array with all the blocks we want to use
-        var allMazeBlocks = new GameObject[columnLength * rowLength-2];
+        var allMazeBlocks = new GameObject[columnLength * rowLength - 2];
         int idxAllMazeBlocks = 0;
         int idxBlockDictionary = 0;
         foreach (MazeBlockPrefab mazeBlock in mazeBlocksToGenerate)
@@ -42,7 +45,7 @@ public class MazeGenerator : MonoBehaviour
             idxBlockDictionary++;
             for (int i = 0; i < mazeBlock.quantity; i++)
             {
-                if (idxAllMazeBlocks < columnLength * rowLength -2)
+                if (idxAllMazeBlocks < columnLength * rowLength - 2)
                 {
                     allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
                     idxAllMazeBlocks++;
@@ -51,35 +54,36 @@ public class MazeGenerator : MonoBehaviour
                     Debug.LogWarning("number of maze blocks is bigger than cell amount, please fix!");
             }
         }
-        if (idxAllMazeBlocks < columnLength * rowLength-2)
+        if (idxAllMazeBlocks < columnLength * rowLength - 2)
             Debug.LogWarning("number of maze blocks is smaller than cell amount, please fix!");
 
 
         randomizeArray(allMazeBlocks);
 
 
-        var blockRotations = new int[rowLength * columnLength -2];
+        var blockRotations = new int[rowLength * columnLength - 2];
 
         //place blocks on grid
-        mazeBlocks[0,0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity).transform;
-        mazeBlocks[rowLength-1, columnLength-1] = Instantiate(finishBlock, new Vector3((rowLength-1)*blockWidth,0,(columnLength-1)* blockWidth), Quaternion.identity).transform;
+        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, transform).transform;
+        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
 
-        for (int i = 0; i < columnLength * rowLength-2; i++)
+        for (int i = 0; i < columnLength * rowLength - 2; i++)
         {
             int rot = UnityEngine.Random.Range(0, 3);
             blockRotations[i] = rot;
             Vector3 pos = new Vector3((i + 1) / columnLength * blockWidth, 0, (i + 1) % columnLength * blockWidth);
-            GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, rot * 90, 0));
-            mazeBlocks[(i +1)/ columnLength, (i+1) % columnLength] = block.transform; //0 is player block
+            GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, rot * 90, 0), transform);
+            mazeBlocks[(i + 1) / columnLength, (i + 1) % columnLength] = block.transform; //0 is player block
         }
         //save msg for client
         var netMsgBlockArray = allMazeBlocks.ToList().ConvertAll<int>(elem => elem.GetComponent<MazeBlock>().id).ToArray();
         msg = new Net_MazeGenerationMsg(columnLength, rowLength, blockWidth, netMsgBlockArray, blockRotations);
 
-        nextBlock = Instantiate(mazeBlocksToGenerate[0].prefab, Vector3.one, Quaternion.identity).transform;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0].prefab, Vector3.one, Quaternion.identity, transform).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
         nextBlock.gameObject.SetActive(false);
-    }
+    
+}
     void randomizeArray(GameObject[] array)
     {
         for (int i = 0; i < array.Length - 1; i++)
@@ -169,6 +173,17 @@ public class MazeGenerator : MonoBehaviour
 
         if (inRow) mazeBlocks[moveLeft ? rowLength - 1 : 0, idx] = nextBlock.transform;
         else mazeBlocks[idx, moveLeft ? columnLength - 1 : 0] = nextBlock.transform;
+
+    }
+    public void restart()
+    {
+        Debug.Log("restart");
+        for (var i = 0; i < this.transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        generateMaze();
+        sendToClient();
 
     }
 
