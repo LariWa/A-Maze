@@ -30,6 +30,8 @@ public class MazeGenerator : MonoBehaviour
         this.blockWidth = blockWidth;
         mazeBlocks = new Transform[rowLength, columnLength];
         mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity).transform;
+        Debug.Log(playerBlock.transform.Find("Player"));
+        PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
         mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity).transform;
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength-1; i++)

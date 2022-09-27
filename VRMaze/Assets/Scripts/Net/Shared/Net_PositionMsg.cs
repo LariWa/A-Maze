@@ -29,7 +29,7 @@ public class Net_PositionMsg : NetMessage
     {
         Code = OpCode.POSITION_MSG;
         objType = objectType;
-        id = id;
+        this.id = id;
         posX = x;
         posY = y;
         posZ = z;
