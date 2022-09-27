@@ -171,14 +171,13 @@ MonoBehaviour:
   rowLength: 6
   blockWidth: 2
   mazeBlocksToGenerate:
-  - quantity: 15
-    prefab: {fileID: 8509683413951879789, guid: 53b8c2c335e590942aa19516b4a8896b, type: 3}
-  - quantity: 15
+  - quantity: 14
+    prefab: {fileID: 1500116582154586774, guid: f62ef51f7493e7f4ca7ddacfb801c305, type: 3}
+  - quantity: 14
     prefab: {fileID: 915653536297429085, guid: 7ae5b730cb0831544aea314f8d65735e, type: 3}
-  placementBlocks:
-  - {fileID: 8509683413951879789, guid: 53b8c2c335e590942aa19516b4a8896b, type: 3}
-  - {fileID: 915653536297429085, guid: 7ae5b730cb0831544aea314f8d65735e, type: 3}
   moveTime: 0.5
+  playerBlock: {fileID: 8509683413951879789, guid: 21c7ded71cad471428c230d34dce1567, type: 3}
+  finishBlock: {fileID: 8509683413951879789, guid: 53b8c2c335e590942aa19516b4a8896b, type: 3}
 --- !u!1 &483357474
 GameObject:
   m_ObjectHideFlags: 0

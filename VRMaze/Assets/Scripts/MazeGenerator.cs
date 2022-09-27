@@ -16,11 +16,11 @@ public class MazeGenerator : MonoBehaviour
         public GameObject prefab;
     }
     public MazeBlockPrefab[] mazeBlocksToGenerate;
-    public GameObject[] placementBlocks;
     Transform[,] mazeBlocks;
     public float moveTime = 5.0f;
     Net_MazeGenerationMsg msg;
     Transform nextBlock;
+    public GameObject playerBlock, finishBlock;
     public static MazeGenerator instance { get; private set; }
 
     // Start is called before the first frame update
@@ -30,17 +30,19 @@ public class MazeGenerator : MonoBehaviour
 
         mazeBlocks = new Transform[rowLength, columnLength];
         //create array with all the blocks we want to use
-        var allMazeBlocks = new GameObject[columnLength * rowLength];
+        var allMazeBlocks = new GameObject[columnLength * rowLength-2];
         int idxAllMazeBlocks = 0;
         int idxBlockDictionary = 0;
         foreach (MazeBlockPrefab mazeBlock in mazeBlocksToGenerate)
         {
-            var blockScript = mazeBlock.prefab.AddComponent<MazeBlock>();
+            var blockScript = mazeBlock.prefab.GetComponent<MazeBlock>();
+            if (blockScript == null)
+                blockScript = mazeBlock.prefab.AddComponent<MazeBlock>();
             blockScript.id = idxBlockDictionary;
             idxBlockDictionary++;
             for (int i = 0; i < mazeBlock.quantity; i++)
             {
-                if (idxAllMazeBlocks < columnLength * rowLength)
+                if (idxAllMazeBlocks < columnLength * rowLength -2)
                 {
                     allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
                     idxAllMazeBlocks++;
@@ -49,28 +51,32 @@ public class MazeGenerator : MonoBehaviour
                     Debug.LogWarning("number of maze blocks is bigger than cell amount, please fix!");
             }
         }
-        if (idxAllMazeBlocks < columnLength * rowLength)
+        if (idxAllMazeBlocks < columnLength * rowLength-2)
             Debug.LogWarning("number of maze blocks is smaller than cell amount, please fix!");
 
 
         randomizeArray(allMazeBlocks);
 
 
-        var blockRotations = new int[rowLength * columnLength];
+        var blockRotations = new int[rowLength * columnLength -2];
 
         //place blocks on grid
-        for (int i = 0; i < columnLength * rowLength; i++)
+        mazeBlocks[0,0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity).transform;
+        mazeBlocks[rowLength-1, columnLength-1] = Instantiate(finishBlock, new Vector3((rowLength-1)*blockWidth,0,(columnLength-1)* blockWidth), Quaternion.identity).transform;
+
+        for (int i = 0; i < columnLength * rowLength-2; i++)
         {
             int rot = UnityEngine.Random.Range(0, 3);
             blockRotations[i] = rot;
-            GameObject block = Instantiate(allMazeBlocks[i], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, rot * 90, 0));
-            mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+            Vector3 pos = new Vector3((i + 1) / columnLength * blockWidth, 0, (i + 1) % columnLength * blockWidth);
+            GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, rot * 90, 0));
+            mazeBlocks[(i +1)/ columnLength, (i+1) % columnLength] = block.transform; //0 is player block
         }
         //save msg for client
         var netMsgBlockArray = allMazeBlocks.ToList().ConvertAll<int>(elem => elem.GetComponent<MazeBlock>().id).ToArray();
         msg = new Net_MazeGenerationMsg(columnLength, rowLength, blockWidth, netMsgBlockArray, blockRotations);
 
-        nextBlock = Instantiate(placementBlocks[1], Vector3.one, Quaternion.identity).transform;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0].prefab, Vector3.one, Quaternion.identity).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
         nextBlock.gameObject.SetActive(false);
     }

@@ -8,8 +8,9 @@ using UnityEngine;
 public class MazeGenerator : MonoBehaviour
 {
     private int columnLength, rowLength, blockWidth;
-    public GameObject[] mazeBlocksToGenerate; //index needs to match given Id in VR scene!!
+    public GameObject[] mazeBlocksToGenerate; //order needs to match order in VR project!!
     Transform[,] mazeBlocks;
+    public GameObject playerBlock, finishBlock;
     public float moveTime = 0.5f;
     public static MazeGenerator instance { get; private set; }
     public GameObject btnPrefab;
@@ -28,10 +29,12 @@ public class MazeGenerator : MonoBehaviour
         this.rowLength = rowLength;
         this.blockWidth = blockWidth;
         mazeBlocks = new Transform[rowLength, columnLength];
+        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity).transform;
+        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity).transform;
         //place blocks on grid
-        for (int i = 0; i < columnLength * rowLength; i++)
+        for (int i = 1; i < columnLength * rowLength-1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i] * 90, 0));
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0));
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
