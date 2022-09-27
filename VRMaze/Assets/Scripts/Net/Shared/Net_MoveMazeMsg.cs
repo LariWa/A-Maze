@@ -10,7 +10,6 @@ public class Net_MoveMazeMsg : NetMessage
     public int index;
     public bool moveLeft;
     public bool isRow;
-    public int newBlockId;
 
     public Net_MoveMazeMsg()
     {
@@ -21,13 +20,12 @@ public class Net_MoveMazeMsg : NetMessage
         Code = OpCode.MOVE_MAZE_MSG;
         Deserialize(reader);
     }
-    public Net_MoveMazeMsg(int index, bool isRow, bool moveLeft, int newBlockId)
+    public Net_MoveMazeMsg(int index, bool isRow, bool moveLeft)
     {
         Code = OpCode.MOVE_MAZE_MSG;
         this.index = index;
         this.moveLeft = moveLeft;
         this.isRow = isRow;
-        this.newBlockId = newBlockId;
 
     }
     public override void Serialize(ref DataStreamWriter writer)
@@ -36,7 +34,6 @@ public class Net_MoveMazeMsg : NetMessage
         writer.WriteInt(index);
         writer.WriteInt(moveLeft ? 1 : 0);
         writer.WriteInt(isRow ? 1 : 0);
-        writer.WriteInt(newBlockId);
 
     }
 
@@ -46,7 +43,6 @@ public class Net_MoveMazeMsg : NetMessage
         index = reader.ReadInt();
         moveLeft = intToBool(reader.ReadInt());
         isRow = intToBool(reader.ReadInt());
-        newBlockId = reader.ReadInt();
 
     }
     bool intToBool(int value)
@@ -56,7 +52,7 @@ public class Net_MoveMazeMsg : NetMessage
     public override void ReceivedOnServer()
     {
         Debug.Log("SERVER: received move maze msg");
-        MazeGenerator.instance.move(index, isRow, moveLeft, newBlockId);
+        MazeGenerator.instance.move(index, isRow, moveLeft);
     }
     public override void ReceivedOnClient()
     {

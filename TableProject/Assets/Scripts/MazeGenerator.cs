@@ -14,6 +14,8 @@ public class MazeGenerator : MonoBehaviour
     public static MazeGenerator instance { get; private set; }
     public GameObject btnPrefab;
     public Transform mazeUI;
+    Transform nextBlock;
+    Vector3 nextBlockPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,7 @@ public class MazeGenerator : MonoBehaviour
         //place camera
         UnityEngine.Camera.main.transform.position = new Vector3(rowLength / 2 * blockWidth, UnityEngine.Camera.main.transform.position.y, columnLength / 2 * blockWidth);
 
-        //place btns 
+        //place movement btns 
         //for rows
         for (int i = 1; i < columnLength - 1; i++)
         {
@@ -44,8 +46,6 @@ public class MazeGenerator : MonoBehaviour
             createBtn(blockWidth, new Vector3(-blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, -90), i, true, false);
             //left
             createBtn(blockWidth, new Vector3(rowLength * blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, 90), i, true, true);
-
-
         }
         //for columns
         for (int i = 1; i < rowLength - 1; i++)
@@ -54,9 +54,13 @@ public class MazeGenerator : MonoBehaviour
             createBtn(blockWidth, new Vector3(i * blockWidth, 0, -blockWidth), Quaternion.Euler(90, 0, 0), i, false, false);
             //down
             createBtn(blockWidth, new Vector3(i * blockWidth, 0, columnLength * blockWidth), Quaternion.Euler(90, 0, 180), i, false, true);
-
-
         }
+
+
+        //place next block
+        nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
+        nextBlock = Instantiate(mazeBlocksToGenerate[1], nextBlockPos, Quaternion.identity).transform;
+        nextBlock.localScale = Vector3.one * blockWidth;
 
     }
     void createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
@@ -67,8 +71,13 @@ public class MazeGenerator : MonoBehaviour
     }
     public void move(int index, bool isRow, bool moveNegDir)
     {
-        if (moveNegDir) moveInNegativeDir(isRow, index, 0);
-        else moveInPositiveDir(isRow, index, 0);
+        if (nextBlock.position == nextBlockPos)
+        {
+            if (moveNegDir) moveInNegativeDir(isRow, index, 0);
+            else moveInPositiveDir(isRow, index, 0);
+            Net_MoveMazeMsg msg = new Net_MoveMazeMsg(index, isRow, moveNegDir);
+            BaseClient.instance.SendToServer(msg);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -95,43 +104,46 @@ public class MazeGenerator : MonoBehaviour
     }
     void moveInPositiveDir(bool isRow, int idx, int newBlockId)//right or up
     {
-        Net_MoveMazeMsg msg = new Net_MoveMazeMsg(idx, isRow, false, newBlockId);
-        BaseClient.instance.SendToServer(msg);
-        for (int i = (isRow ? rowLength : columnLength) - 1; i >= 0; i--)
+          for (int i = (isRow ? rowLength : columnLength) - 1; i >= 0; i--)
         {
             var block = isRow ? mazeBlocks[i, idx] : mazeBlocks[idx, i];
             var moveVector = isRow ? new Vector3(blockWidth, 0, 0) : new Vector3(0, 0, blockWidth);
             var tween = block.DOMove(block.position + moveVector, moveTime);
             if (isLastBlock(isRow, i, false))//delete last block
-                tween.OnComplete(() => Destroy(block.gameObject));
+                tween.OnComplete(() =>
+                {
+                    nextBlock = block;
+                    nextBlock.position = nextBlockPos;
+                });
             else
             {
                 if (isRow) mazeBlocks[i + 1, idx] = block;
                 else mazeBlocks[idx, i + 1] = block;
             }
         }
-        placeNewBlock(idx, isRow, false, newBlockId);
+        placeNewBlock(idx, isRow, false);
 
     }
     void moveInNegativeDir(bool isRow, int idx, int newBlockId)//left or down
     {
-        Net_MoveMazeMsg msg = new Net_MoveMazeMsg(idx, isRow, true, newBlockId);
-        BaseClient.instance.SendToServer(msg);
-
         for (int i = 0; i < (isRow ? rowLength : columnLength); i++)
         {
             var block = isRow ? mazeBlocks[i, idx] : mazeBlocks[idx, i];
             var moveVector = isRow ? new Vector3(-blockWidth, 0, 0) : new Vector3(0, 0, -blockWidth);
             var tween = block.DOMove(block.position + moveVector, moveTime);
             if (isLastBlock(isRow, i, true))//delete last block
-                tween.OnComplete(() => Destroy(block.gameObject));
+                tween.OnComplete(() =>
+                {
+                    nextBlock = block;
+                    nextBlock.position = nextBlockPos;
+                });
             else
             {
                 if (isRow) mazeBlocks[i - 1, idx] = block;
                 else mazeBlocks[idx, i - 1] = block;
             }
         }
-        placeNewBlock(idx, isRow, true, newBlockId);
+        placeNewBlock(idx, isRow, true);
 
     }
     bool isLastBlock(bool isRow, int idx, bool moveNegDirt)
@@ -140,20 +152,16 @@ public class MazeGenerator : MonoBehaviour
         else return idx == columnLength - 1 && !moveNegDirt || idx == 0 && moveNegDirt;
     }
 
-    void placeNewBlock(int idx, bool inRow, bool moveNegDirt, int newBlockId)
-
+    void placeNewBlock(int idx, bool inRow, bool moveNegDirt)
     {
         Vector3 pos;
         if (inRow) pos = new Vector3(moveNegDirt ? rowLength * blockWidth : -blockWidth, 0, idx * blockWidth);
         else pos = new Vector3(idx * blockWidth, 0, moveNegDirt ? columnLength * blockWidth : -blockWidth);
-        var newBlock = Instantiate(mazeBlocksToGenerate[newBlockId], pos, Quaternion.identity);
+        //var newBlock = Instantiate(mazeBlocksToGenerate[newBlockId], pos, Quaternion.identity);
+        nextBlock.position = pos;
         var moveVector = inRow ? new Vector3((moveNegDirt ? -1 : 1) * blockWidth, 0, 0) : new Vector3(0, 0, (moveNegDirt ? -1 : 1) * blockWidth);
-        var tween = newBlock.transform.DOMove(newBlock.transform.position + moveVector, moveTime);
-        tween.OnComplete(() =>
-        {
-            if (inRow) mazeBlocks[moveNegDirt ? rowLength - 1 : 0, idx] = newBlock.transform;
-            else mazeBlocks[idx, moveNegDirt ? columnLength - 1 : 0] = newBlock.transform;
-        });
+        var tween = nextBlock.transform.DOMove(nextBlock.transform.position + moveVector, moveTime);
+        if (inRow) mazeBlocks[moveNegDirt ? rowLength - 1 : 0, idx] = nextBlock.transform;
+        else mazeBlocks[idx, moveNegDirt ? columnLength - 1 : 0] = nextBlock.transform;
     }
-
 }
