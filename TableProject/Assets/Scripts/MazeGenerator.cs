@@ -29,13 +29,13 @@ public class MazeGenerator : MonoBehaviour
         this.rowLength = rowLength;
         this.blockWidth = blockWidth;
         mazeBlocks = new Transform[rowLength, columnLength];
-        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, this.gameObject.transform).transform;
+        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, transform).transform;
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
-        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, this.gameObject.transform).transform;
+        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength-1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0), this.gameObject.transform);
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0), transform);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
@@ -63,7 +63,7 @@ public class MazeGenerator : MonoBehaviour
 
         //place next block
         nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
-        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.identity, this.gameObject.transform).transform;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.identity, transform).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
 
     }
