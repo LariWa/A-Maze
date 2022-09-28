@@ -16,7 +16,7 @@ public class MazeGenerator : MonoBehaviour
     public GameObject btnPrefab;
     public GameObject rotateBtn;
     public Transform mazeUI;
-    Transform nextBlock;
+   public Transform nextBlock;
     Vector3 nextBlockPos;
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,7 @@ public class MazeGenerator : MonoBehaviour
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(-90, 0,blockRotations[i - 1] * 90), transform);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
@@ -63,8 +63,8 @@ public class MazeGenerator : MonoBehaviour
 
         //place next block
         nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
-        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.identity, transform).transform;
-        nextBlock.localScale = Vector3.one * blockWidth;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(-90, 0, 0), transform).transform;
+        //nextBlock.localScale = Vector3.one * blockWidth;
 
         Instantiate(rotateBtn, new Vector3(nextBlockPos.x + blockWidth, 0, nextBlockPos.z), Quaternion.Euler(90, 0, 0), mazeUI);
 
@@ -196,7 +196,7 @@ public class MazeGenerator : MonoBehaviour
     }
     public void rotateBlock()
     {
-        nextBlock.Rotate(0, 90, 0);
+        nextBlock.Rotate(0, 0, 90);
         BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
 
     }
