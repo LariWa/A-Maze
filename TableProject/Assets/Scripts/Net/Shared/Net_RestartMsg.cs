@@ -13,7 +13,7 @@ public class Net_RestartMsg : NetMessage
     }
     public Net_RestartMsg(DataStreamReader reader)
     {
-        Code = OpCode.CHAT_MESSAGE;
+        Code = OpCode.RESTART_MSG;
         Deserialize(reader);
     }
    

@@ -4,31 +4,31 @@ using Unity.Collections;
 using Unity.Networking.Transport;
 using UnityEngine;
 
-public class Net_RestartMsg : NetMessage
+public class Net_RotateBlockMsg : NetMessage
 {
     // 0-8 OP CODE
-    public Net_RestartMsg()
+    public Net_RotateBlockMsg()
     {
-        Code = OpCode.RESTART_MSG;
+        Code = OpCode.ROTATEBLOCK_MSG;
     }
-    public Net_RestartMsg(DataStreamReader reader)
+    public Net_RotateBlockMsg(DataStreamReader reader)
     {
-        Code = OpCode.RESTART_MSG;
+        Code = OpCode.ROTATEBLOCK_MSG;
         Deserialize(reader);
     }
-
+   
     public override void Serialize(ref DataStreamWriter writer)
     {
         writer.WriteByte((byte)Code);
     }
-
+   
     public override void ReceivedOnServer()
     {
-        Debug.Log("SERVER: restart");
-        MazeGenerator.instance.restart();
+        Debug.Log("SERVER: rotate");
+        MazeGenerator.instance.rotateBlock();
     }
     public override void ReceivedOnClient()
     {
-        Debug.Log("Client: restart");
+        Debug.Log("Client: rotate");
     }
 }
