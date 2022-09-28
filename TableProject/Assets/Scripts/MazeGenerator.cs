@@ -77,6 +77,7 @@ public class MazeGenerator : MonoBehaviour
     {
         if (nextBlock.position == nextBlockPos)
         {
+            movePlayerWithMaze();
             if (moveNegDir) moveInNegativeDir(isRow, index, 0);
             else moveInPositiveDir(isRow, index, 0);
             Net_MoveMazeMsg msg = new Net_MoveMazeMsg(index, isRow, moveNegDir);
@@ -182,5 +183,12 @@ public class MazeGenerator : MonoBehaviour
         var tween = nextBlock.transform.DOMove(nextBlock.transform.position + moveVector, moveTime);
         if (inRow) mazeBlocks[moveNegDirt ? rowLength - 1 : 0, idx] = nextBlock.transform;
         else mazeBlocks[idx, moveNegDirt ? columnLength - 1 : 0] = nextBlock.transform;
+    }
+    void movePlayerWithMaze()
+    {
+        var column = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
+          var row = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
+        Debug.Log(column + " " +row);
+        PositionManager.instance.player.parent = mazeBlocks[column, row];
     }
 }

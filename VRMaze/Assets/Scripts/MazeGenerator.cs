@@ -22,6 +22,7 @@ public class MazeGenerator : MonoBehaviour
     Transform nextBlock;
     public GameObject playerBlock, finishBlock;
     public static MazeGenerator instance { get; private set; }
+    Transform player;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +83,11 @@ public class MazeGenerator : MonoBehaviour
         nextBlock = Instantiate(mazeBlocksToGenerate[0].prefab, Vector3.one, Quaternion.identity, transform).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
         nextBlock.gameObject.SetActive(false);
-    
+
+        //save player
+        player = mazeBlocks[0, 0].transform.Find("Player");
+
+
 }
     void randomizeArray(GameObject[] array)
     {
@@ -104,6 +109,7 @@ public class MazeGenerator : MonoBehaviour
 
     public void move(int idx, bool isRow, bool moveLeft)
     {
+        movePlayerWithMaze();
         if (moveLeft)
             moveInNegativeDir(isRow, idx);
         else
@@ -185,6 +191,13 @@ public class MazeGenerator : MonoBehaviour
         generateMaze();
         sendToClient();
 
+    }
+    void movePlayerWithMaze()
+    {
+        var column = (int)((player.position.x + blockWidth / 2) / blockWidth);
+        var row = (int)((player.position.z + blockWidth / 2) / blockWidth);
+        Debug.Log(column + " " + row);
+      player.parent = mazeBlocks[column, row];
     }
 
 }
