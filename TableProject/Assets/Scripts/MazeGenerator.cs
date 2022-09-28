@@ -78,14 +78,22 @@ public class MazeGenerator : MonoBehaviour
     }
     public void move(int index, bool isRow, bool moveNegDir)
     {
-        if (nextBlock.position == nextBlockPos)
+    
+        if ((nextBlock.position == nextBlockPos) && !isPlayerInMovement(index, isRow))
         {
-            movePlayerWithMaze();
+            //movePlayerWithMaze();
             if (moveNegDir) moveInNegativeDir(isRow, index, 0);
             else moveInPositiveDir(isRow, index, 0);
             Net_MoveMazeMsg msg = new Net_MoveMazeMsg(index, isRow, moveNegDir);
             BaseClient.instance.SendToServer(msg);
         }
+    }
+    bool isPlayerInMovement(int index, bool isRow)
+    {
+        var column = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
+        var row = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
+        if (isRow) return row == index;
+        else return column == index;
     }
     // Update is called once per frame
     void Update()

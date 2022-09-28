@@ -24,9 +24,9 @@ public class sendPos : MonoBehaviour
         //{
             Net_PositionMsg msg;
             if (isPlayer)
-                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.position.x, transform.position.y, transform.position.z);
             else 
-                msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+                msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.position.x, transform.position.y, transform.position.z);
             server.SendToClient(msg);
             lastSend = Time.time;
             prevPos = transform.position;
