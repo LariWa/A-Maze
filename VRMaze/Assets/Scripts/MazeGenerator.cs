@@ -199,5 +199,9 @@ public class MazeGenerator : MonoBehaviour
         Debug.Log(column + " " + row);
       player.parent = mazeBlocks[column, row];
     }
+    public void rotateBlock()
+    {
+        nextBlock.Rotate(0, 90, 0);
+    }
 
 }
