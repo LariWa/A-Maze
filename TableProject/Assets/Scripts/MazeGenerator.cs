@@ -14,6 +14,7 @@ public class MazeGenerator : MonoBehaviour
     public float moveTime = 0.5f;
     public static MazeGenerator instance { get; private set; }
     public GameObject btnPrefab;
+    public GameObject rotateBtn;
     public Transform mazeUI;
     Transform nextBlock;
     Vector3 nextBlockPos;
@@ -33,9 +34,9 @@ public class MazeGenerator : MonoBehaviour
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
         mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
         //place blocks on grid
-        for (int i = 1; i < columnLength * rowLength-1; i++)
+        for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i-1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i-1] * 90, 0), transform);
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
@@ -60,11 +61,13 @@ public class MazeGenerator : MonoBehaviour
             createBtn(blockWidth, new Vector3(i * blockWidth, 0, columnLength * blockWidth), Quaternion.Euler(90, 0, 180), i, false, true);
         }
 
-
         //place next block
         nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
         nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.identity, transform).transform;
         nextBlock.localScale = Vector3.one * blockWidth;
+
+        Instantiate(rotateBtn, new Vector3(nextBlockPos.x + blockWidth, 0, nextBlockPos.z), Quaternion.Euler(90, 0, 0), mazeUI);
+
 
     }
     void createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
@@ -77,6 +80,7 @@ public class MazeGenerator : MonoBehaviour
     {
         if (nextBlock.position == nextBlockPos)
         {
+            movePlayerWithMaze();
             if (moveNegDir) moveInNegativeDir(isRow, index, 0);
             else moveInPositiveDir(isRow, index, 0);
             Net_MoveMazeMsg msg = new Net_MoveMazeMsg(index, isRow, moveNegDir);
@@ -89,7 +93,7 @@ public class MazeGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("restart");
-             // destroy maze
+            // destroy maze
             for (var i = 0; i < this.transform.childCount; i++)
             {
                 Destroy(transform.GetChild(i).gameObject);
@@ -123,7 +127,7 @@ public class MazeGenerator : MonoBehaviour
     }
     void moveInPositiveDir(bool isRow, int idx, int newBlockId)//right or up
     {
-          for (int i = (isRow ? rowLength : columnLength) - 1; i >= 0; i--)
+        for (int i = (isRow ? rowLength : columnLength) - 1; i >= 0; i--)
         {
             var block = isRow ? mazeBlocks[i, idx] : mazeBlocks[idx, i];
             var moveVector = isRow ? new Vector3(blockWidth, 0, 0) : new Vector3(0, 0, blockWidth);
@@ -182,5 +186,18 @@ public class MazeGenerator : MonoBehaviour
         var tween = nextBlock.transform.DOMove(nextBlock.transform.position + moveVector, moveTime);
         if (inRow) mazeBlocks[moveNegDirt ? rowLength - 1 : 0, idx] = nextBlock.transform;
         else mazeBlocks[idx, moveNegDirt ? columnLength - 1 : 0] = nextBlock.transform;
+    }
+    void movePlayerWithMaze()
+    {
+        var column = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
+        var row = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
+        Debug.Log(column + " " + row);
+        PositionManager.instance.player.parent = mazeBlocks[column, row];
+    }
+    public void rotateBlock()
+    {
+        nextBlock.Rotate(0, 90, 0);
+        BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
+
     }
 }

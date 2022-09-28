@@ -523,6 +523,7 @@ MonoBehaviour:
   finishBlock: {fileID: 8509683413951879789, guid: e3214c0e3052d904c8576e4309c1320a, type: 3}
   moveTime: 0.5
   btnPrefab: {fileID: 7373323298163969320, guid: e00e7616c56310643a376336e226b3c3, type: 3}
+  rotateBtn: {fileID: 1969233852684768162, guid: 17ebd5e485f62f440a1383d3bcec92d2, type: 3}
   mazeUI: {fileID: 690898457}
 --- !u!4 &658500786
 Transform:

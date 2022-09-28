@@ -93,6 +93,8 @@ public class BaseServer : MonoBehaviour
             case OpCode.POSITION_MSG: msg = new Net_PositionMsg(stream); break;
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
             case OpCode.RESTART_MSG: msg = new Net_RestartMsg(stream); break;
+            case OpCode.ROTATEBLOCK_MSG: msg = new Net_RotateBlockMsg(stream); break;
+
 
             default:
                 Debug.Log("message received had no OpCode");

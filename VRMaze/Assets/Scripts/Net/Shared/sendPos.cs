@@ -20,17 +20,17 @@ public class sendPos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timePassed() && posChanged())
-        {
+        //if (timePassed() && posChanged())
+        //{
             Net_PositionMsg msg;
             if (isPlayer)
-                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.position.x, transform.position.y, transform.position.z);
+                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
             else 
-                msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.position.x, transform.position.y, transform.position.z);
+                msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
             server.SendToClient(msg);
             lastSend = Time.time;
             prevPos = transform.position;
-        }
+        //}
     }
 
     bool timePassed()
