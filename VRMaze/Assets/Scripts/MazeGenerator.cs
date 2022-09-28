@@ -23,6 +23,7 @@ public class MazeGenerator : MonoBehaviour
     public GameObject playerBlock, finishBlock;
     public static MazeGenerator instance { get; private set; }
     Transform player;
+    public GameObject wall;
 
     // Start is called before the first frame update
     void Start()
@@ -65,8 +66,8 @@ public class MazeGenerator : MonoBehaviour
         var blockRotations = new int[rowLength * columnLength - 2];
 
         //place blocks on grid
-        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, transform).transform;
-        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
+        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, playerBlock.transform.rotation, transform).transform;
+        mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth),finishBlock.transform.rotation, transform).transform;
 
         for (int i = 0; i < columnLength * rowLength - 2; i++)
         {
@@ -81,14 +82,27 @@ public class MazeGenerator : MonoBehaviour
         msg = new Net_MazeGenerationMsg(columnLength, rowLength, blockWidth, netMsgBlockArray, blockRotations);
 
         nextBlock = Instantiate(mazeBlocksToGenerate[0].prefab, Vector3.one, Quaternion.identity, transform).transform;
-        nextBlock.localScale = Vector3.one * blockWidth;
+        //nextBlock.localScale = Vector3.one * blockWidth;
         nextBlock.gameObject.SetActive(false);
 
         //save player
         player = mazeBlocks[0, 0].transform.Find("Player");
+        //wallLeft
+        var wallLeft = Instantiate(wall, transform);
+        wallLeft.transform.localScale = new Vector3(0.01f,  blockWidth, columnLength * blockWidth);
+        wallLeft.transform.position = new Vector3(-blockWidth/2f, blockWidth/2f, ((float)(columnLength  * blockWidth)/2)-blockWidth/2);
 
+        var wallRight = Instantiate(wall, transform);
+        wallRight.transform.localScale = new Vector3(0.01f, blockWidth, columnLength * blockWidth);
+        wallRight.transform.position = new Vector3(rowLength*blockWidth-blockWidth / 2f, blockWidth / 2f, ((float)(columnLength * blockWidth) / 2) - blockWidth / 2);
 
-}
+        var wallDown = Instantiate(wall, transform);
+        wallDown.transform.localScale = new Vector3(rowLength * blockWidth, blockWidth, 0.01f );
+        wallDown.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) -blockWidth / 2,blockWidth/2, - blockWidth / 2);
+        var wallUp = Instantiate(wall, transform);
+        wallUp.transform.localScale = new Vector3(rowLength * blockWidth, blockWidth, 0.01f);
+        wallUp.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) - blockWidth / 2, blockWidth / 2 ,columnLength * blockWidth - blockWidth / 2f);
+    }
     void randomizeArray(GameObject[] array)
     {
         for (int i = 0; i < array.Length - 1; i++)
@@ -109,7 +123,7 @@ public class MazeGenerator : MonoBehaviour
 
     public void move(int idx, bool isRow, bool moveLeft)
     {
-        movePlayerWithMaze();
+        //movePlayerWithMaze();
         if (moveLeft)
             moveInNegativeDir(isRow, idx);
         else
