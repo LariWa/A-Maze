@@ -521,6 +521,9 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: e0465501cbad64a1d9a94f93be4d48f5, type: 3}
   - {fileID: 919132149155446097, guid: 593f89e8cf3b74a6f92fadaebaf998a1, type: 3}
   - {fileID: 919132149155446097, guid: cf8ea9adb9428479ea8071da70e4d12d, type: 3}
+  - {fileID: 919132149155446097, guid: e0465501cbad64a1d9a94f93be4d48f5, type: 3}
+  - {fileID: 919132149155446097, guid: 593f89e8cf3b74a6f92fadaebaf998a1, type: 3}
+  - {fileID: 919132149155446097, guid: cf8ea9adb9428479ea8071da70e4d12d, type: 3}
   playerBlock: {fileID: 8972195327558150271, guid: 37a5700af523a49259e6906e752693c9, type: 3}
   finishBlock: {fileID: 919132149155446097, guid: 656ba8f4890854b22afb332b5a318e52, type: 3}
   moveTime: 0.5
