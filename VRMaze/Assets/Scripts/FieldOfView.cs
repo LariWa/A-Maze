@@ -23,6 +23,7 @@ public class FieldOfView : MonoBehaviour
     Vector3 directionToTarget;
     public float speed = 5f;
     float distance = 0;
+    public GameObject sword;
     private void Start()
     {
         // playerRef = GameObject.FindGameObjectWithTag("Player");
@@ -73,8 +74,13 @@ public class FieldOfView : MonoBehaviour
         if (canSeePlayer)
         {
 /*            material.color = Color.red;
-*/          animations.Play("Spider_Armature|run_ani_vor");
-            transform.position += new Vector3(directionToTarget.x/60, 0, directionToTarget.z/60) ;
+*/          
+            animations.Play("Spider_Armature|run_ani_vor");
+            if (distanceToTarget > 0.2f){
+
+                transform.position += new Vector3(directionToTarget.x/300, 0, directionToTarget.z/300) ;
+            }
+
             float angle2 = Vector3.Angle(new Vector3(directionToTarget.x,0,directionToTarget.z), -transform.forward);
             if (angle2 > 2f)
             {
@@ -93,6 +99,15 @@ public class FieldOfView : MonoBehaviour
             // transform.rotation = Quaternion.Euler(0,diff,0);
             // transform.Rotate(0,diff,0);
 
+        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == sword.name){
+
+            Destroy(this.gameObject);
         }
     }
 }

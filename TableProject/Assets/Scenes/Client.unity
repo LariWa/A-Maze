@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -517,19 +517,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mazeBlocksToGenerate:
-  - {fileID: 919132149155446097, guid: 656ba8f4890854b22afb332b5a318e52, type: 3}
-  - {fileID: 919132149155446097, guid: e0465501cbad64a1d9a94f93be4d48f5, type: 3}
-  - {fileID: 919132149155446097, guid: 593f89e8cf3b74a6f92fadaebaf998a1, type: 3}
-  - {fileID: 919132149155446097, guid: cf8ea9adb9428479ea8071da70e4d12d, type: 3}
-  - {fileID: 919132149155446097, guid: e0465501cbad64a1d9a94f93be4d48f5, type: 3}
-  - {fileID: 919132149155446097, guid: 593f89e8cf3b74a6f92fadaebaf998a1, type: 3}
-  - {fileID: 919132149155446097, guid: cf8ea9adb9428479ea8071da70e4d12d, type: 3}
-  playerBlock: {fileID: 8972195327558150271, guid: 37a5700af523a49259e6906e752693c9, type: 3}
-  finishBlock: {fileID: 919132149155446097, guid: 656ba8f4890854b22afb332b5a318e52, type: 3}
-  moveTime: 0.5
+  - {fileID: 2686856401831875769, guid: cbd66a30135984a00b104c98efe7329d, type: 3}
+  - {fileID: 3981652969568471002, guid: 84518d0f0168142f784ee44d874372bf, type: 3}
+  - {fileID: 2680434698124455456, guid: 71487f8138f374f3fa5b0b0cf524a3c7, type: 3}
+  - {fileID: 6228477852510775571, guid: e865cf6e1cd584da1afe2de082a6c961, type: 3}
+  - {fileID: 5041885246322666046, guid: cc59d39775785485584d89a81a56f787, type: 3}
+  - {fileID: 4062607295306112753, guid: 924e8db5bf77c47c093e886de8760117, type: 3}
+  - {fileID: 2734951020711408795, guid: 219355ae7c809428c9044205cdd150d1, type: 3}
+  playerBlock: {fileID: 5037515869671953104, guid: 63d0f4abe0672424db59318a3dde4de2, type: 3}
+  finishBlock: {fileID: 911363036348541477, guid: 10cc9b5af4c4c44ce909c75a61b1e01c, type: 3}
+  moveTime: 1
   btnPrefab: {fileID: 7373323298163969320, guid: e00e7616c56310643a376336e226b3c3, type: 3}
   rotateBtn: {fileID: 1969233852684768162, guid: 17ebd5e485f62f440a1383d3bcec92d2, type: 3}
   mazeUI: {fileID: 690898457}
+  nextBlock: {fileID: 0}
 --- !u!4 &658500786
 Transform:
   m_ObjectHideFlags: 0
@@ -538,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658500784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.033961907, y: -9.627212, z: -1.444303}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -724,6 +725,7 @@ GameObject:
   - component: {fileID: 1411845813}
   - component: {fileID: 1411845812}
   - component: {fileID: 1411845814}
+  - component: {fileID: 1411845815}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -773,6 +775,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemies: []
+--- !u!114 &1411845815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411845810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e917c89b60d2ef044bfbe7d59225c6ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527259228
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class PositionManager : MonoBehaviour
     }
     public void updatePlayerPos(Vector3 pos)
     {
-        player.localPosition = new Vector3(pos.x, player.localPosition.y, pos.z);
+        player.position = new Vector3(pos.x, player.localPosition.y, pos.z);
     }
     public void updateEnemyPos(int id, Vector3 pos)
     {

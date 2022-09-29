@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="clip-turn">
+      <rect width="200" height="200"/>
+    </clipPath>
+  </defs>
+  <g id="turn" clip-path="url(#clip-turn)">
+    <rect width="200" height="200" fill="rgba(255,255,255,0)"/>
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(14 14)" fill="#d3d3d3" stroke="#000" stroke-width="3">
+      <rect width="173" height="173" rx="20" stroke="none"/>
+      <rect x="1.5" y="1.5" width="170" height="170" rx="18.5" fill="none"/>
+    </g>
+    <g id="Group_2" data-name="Group 2" transform="translate(39.796 -9.744) rotate(18)">
+      <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(42.367 138.336) rotate(-90)" fill="none" stroke="#000" stroke-width="20">
+        <ellipse cx="48.918" cy="48.918" rx="48.918" ry="48.918" stroke="none"/>
+        <ellipse cx="48.918" cy="48.918" rx="38.918" ry="38.918" fill="none"/>
+      </g>
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="37.507" height="55.084" transform="translate(39.507 68.06) rotate(-82)" fill="#d3d3d3"/>
+      <g id="Polygon_2" data-name="Polygon 2" transform="matrix(0.921, 0.391, -0.391, 0.921, 43.715, 40.474)">
+        <path d="M 47.24345016479492 29.70975494384766 L 2.085744380950928 29.70975494384766 L 24.66459655761719 1.596957206726074 L 47.24345016479492 29.70975494384766 Z" stroke="none"/>
+        <path d="M 24.66459655761719 3.193899154663086 L 4.171493530273438 28.70974540710449 L 45.15769958496094 28.70974540710449 L 24.66459655761719 3.193899154663086 M 24.66459655761719 -5.7220458984375e-06 L 49.32919692993164 30.70974540710449 L -3.814697265625e-06 30.70974540710449 L 24.66459655761719 -5.7220458984375e-06 Z" stroke="none" fill="#000"/>
+      </g>
+    </g>
+  </g>
+</svg>
