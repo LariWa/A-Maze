@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658822, g: 0.49642307, b: 0.5748253, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,7 +189,7 @@ MonoBehaviour:
   playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
-  player: {fileID: 1076752510}
+  player: {fileID: 0}
 --- !u!1 &483357474
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,11 +284,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!4 &1076752510 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9053599722756003742, guid: 5c9db2dd18c769b4ba503e5c1829ad51, type: 3}
-  m_PrefabInstance: {fileID: 1772912541}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1721249475
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +408,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9db2dd18c769b4ba503e5c1829ad51, type: 3}
+--- !u!1 &1950046031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950046033}
+  - component: {fileID: 1950046032}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1950046032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950046031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff1086d8c397efc2b25a965426e9b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: chase
+    clip: {fileID: 8300000, guid: 7bf4fccd753a70533abc9de546c15d7c, type: 3}
+    volume: 0.468
+    pitch: 0.82
+    source: {fileID: 0}
+  - name: scream
+    clip: {fileID: 8300000, guid: 07bdc7040c4cf2f3ea637a74a43e1963, type: 3}
+    volume: 0.503
+    pitch: 1.12
+    source: {fileID: 0}
+  - name: attackFootstep
+    clip: {fileID: 8300000, guid: ab3689a4ff934e629ba9ab5d1db68263, type: 3}
+    volume: 0.351
+    pitch: 0.98
+    source: {fileID: 0}
+  - name: normalFootstep
+    clip: {fileID: 8300000, guid: a23fc27ff0ac16f27bfa537083cd4501, type: 3}
+    volume: 0.269
+    pitch: 1.01
+    source: {fileID: 0}
+--- !u!4 &1950046033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950046031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018269990
 GameObject:
   m_ObjectHideFlags: 0

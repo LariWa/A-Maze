@@ -10,11 +10,13 @@ public class FieldOfView : MonoBehaviour
     [Range(0, 360)] public float angle;
 
     public GameObject playerRef;
+    public SoundManager soundManager;
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
     public bool canSeePlayer ;
+    public int discoverPlayer = 0;
     public PathCreator pathCreator;
     Animation animations;
     public float distanceToTarget;
@@ -26,6 +28,7 @@ public class FieldOfView : MonoBehaviour
     public GameObject sword;
     private void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         // playerRef = GameObject.FindGameObjectWithTag("Player");
         //pathCreator = (PathCreator) GetComponent("PathCreator");
 /*        StartCoroutine(FOVRoutine());
@@ -57,25 +60,46 @@ public class FieldOfView : MonoBehaviour
                 distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
                     canSeePlayer = true;
-                else
+                    if (discoverPlayer == 0) {
+                        discoverPlayer = 1;
+                    }
+                }
+                else {
                     canSeePlayer = false;
+                    discoverPlayer = 0;
+                    soundManager.Stop("chase");
+                }
             }
-            else
+            else{
                 canSeePlayer = false;
+                discoverPlayer = 0;
+                soundManager.Stop("chase");
+            }
         }
-        else if (canSeePlayer)
+        else if (canSeePlayer){
             canSeePlayer = false;
+            discoverPlayer = 0;
+            soundManager.Stop("chase");
+        }
 
 
 
 /*        material =GetComponent<Renderer>().material;
 */      animations =GetComponent<Animation>();
+        //Scream if it's the spider's first time seeing the player 
+        if (discoverPlayer == 1) {
+            soundManager.Play("scream");
+            soundManager.Play("chase");
+            discoverPlayer = 2;
+        }
+
         if (canSeePlayer)
         {
 /*            material.color = Color.red;
 */          
-            animations.Play("Spider_Armature|run_ani_vor");
+            animations.Play("Spider_Armature_run_ani_attack");
             if (distanceToTarget > 0.2f){
 
                 transform.position += new Vector3(directionToTarget.x/300, 0, directionToTarget.z/300) ;
@@ -93,7 +117,7 @@ public class FieldOfView : MonoBehaviour
         {
            distance -= speed * Time.deltaTime;
            transform.position = pathCreator.path.GetPointAtDistance(distance);
-           animations.Play("Spider_Armature|run_ani_vor");
+           animations.Play("Spider_Armature_run_ani_normal");
            transform.rotation = pathCreator.path.GetRotationAtDistance(distance) ;
 
             // transform.rotation = Quaternion.Euler(0,diff,0);

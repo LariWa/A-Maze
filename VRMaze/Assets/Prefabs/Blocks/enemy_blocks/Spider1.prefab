@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 1068099852384494088}
   - component: {fileID: 1068099852384494095}
   - component: {fileID: 1068099852384494094}
+  - component: {fileID: 1546499792587913048}
   m_Layer: 8
   m_Name: Spider1
   m_TagString: Spider
@@ -570,6 +571,8 @@ Animation:
   - {fileID: 7400010, guid: 2efacd88951b9ee419c648e9057bb527, type: 3}
   - {fileID: 7400022, guid: 2efacd88951b9ee419c648e9057bb527, type: 3}
   - {fileID: 3785738007371948810, guid: cd9eb9d181641a94c867dcea0cc87a3f, type: 3}
+  - {fileID: 7400000, guid: ea672fb9c86030891a0e04827455eb40, type: 2}
+  - {fileID: 7400000, guid: b557f40973886c1f4a8a175f268176ee, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -589,6 +592,7 @@ MonoBehaviour:
   radius: 0.8
   angle: 360
   playerRef: {fileID: 0}
+  soundManager: {fileID: 0}
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -596,10 +600,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canSeePlayer: 0
+  discoverPlayer: 0
   pathCreator: {fileID: 0}
   distanceToTarget: 0
   speed: 0.3
   sword: {fileID: 2911387718850277872, guid: 1d5eab76bd80d644ab3e4053a2da8cc2, type: 3}
+--- !u!114 &1546499792587913048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068099853345509946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4053475e7ecad33e8a82cb09aaf90d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1068099853345509948
 GameObject:
   m_ObjectHideFlags: 0
