@@ -22,14 +22,17 @@ public class MazeGenerator : MonoBehaviour
     Transform nextBlock;
     public GameObject playerBlock, finishBlock;
     public static MazeGenerator instance { get; private set; }
-    Transform player;
     public GameObject wall;
+    public Transform player;
+    Transform initPosPlayer;
+
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         generateMaze();
+        initPosPlayer = player.transform;
     }
     void generateMaze()
     {
@@ -86,7 +89,7 @@ public class MazeGenerator : MonoBehaviour
         nextBlock.gameObject.SetActive(false);
 
         //save player
-        player = mazeBlocks[0, 0].transform.Find("Player");
+      //  player = mazeBlocks[0, 0].transform.Find("Player");
         //wallLeft
         var wallLeft = Instantiate(wall, transform);
         wallLeft.transform.localScale = new Vector3(0.01f,  blockWidth, columnLength * blockWidth);
@@ -204,14 +207,15 @@ public class MazeGenerator : MonoBehaviour
         }
         generateMaze();
         sendToClient();
+        player = initPosPlayer;
 
     }
     void movePlayerWithMaze()
     {
-        var column = (int)((player.position.x + blockWidth / 2) / blockWidth);
-        var row = (int)((player.position.z + blockWidth / 2) / blockWidth);
-        Debug.Log(column + " " + row);
-      player.parent = mazeBlocks[column, row];
+      //  var column = (int)((player.position.x + blockWidth / 2) / blockWidth);
+      //  var row = (int)((player.position.z + blockWidth / 2) / blockWidth);
+      //  Debug.Log(column + " " + row);
+      //player.parent = mazeBlocks[column, row];
     }
     public void rotateBlock()
     {

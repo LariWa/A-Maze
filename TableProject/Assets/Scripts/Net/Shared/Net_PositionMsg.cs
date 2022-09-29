@@ -61,6 +61,7 @@ public class Net_PositionMsg : NetMessage
     }
     public override void ReceivedOnClient()
     {
+
         if (objType == objTypeCode.PLAYER)
             PositionManager.instance.updatePlayerPos(new Vector3(posX, posY, posZ));
         else if (objType == objTypeCode.ENEMY)
