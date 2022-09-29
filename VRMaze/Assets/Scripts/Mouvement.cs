@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Mouvement : MonoBehaviour
 {
     public float walkspeed;
@@ -13,15 +14,23 @@ public class Mouvement : MonoBehaviour
     Animation animations;
     bool breaking = false;
     bool die = false;
+    public int spidersNb;
+    public GameObject cam;
+    
     // Start is called before the first frame update
     void Start()
     {
         // animations = GetComponent<Animation>();
+        LayerMask spiderMask =  LayerMask.GetMask("Spider");
+        spidersNb = Physics.OverlapSphere(transform.position, 0.3f, spiderMask).Length;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        LayerMask spiderMask =  LayerMask.GetMask("Spider");
+        spidersNb = Physics.OverlapSphere(transform.position, 0.3f, spiderMask).Length;
         // spiders = GameObject.FindGameObjectsWithTag("Spider");
         // foreach (GameObject spider in spiders)
         // {
@@ -55,6 +64,11 @@ public class Mouvement : MonoBehaviour
         else
         {
             // animate = "walk";
+        }
+
+        if (OVRInput.Get(OVRInput.Button.One)){
+            // transform.Translate(0, 0, speed * Time.deltaTime);
+            transform.position += speed * Time.deltaTime * cam.transform.forward.normalized;
         }
 
         if (Input.GetKey(inputFront))
