@@ -526,7 +526,7 @@ MonoBehaviour:
   - {fileID: 2734951020711408795, guid: 219355ae7c809428c9044205cdd150d1, type: 3}
   playerBlock: {fileID: 5037515869671953104, guid: 63d0f4abe0672424db59318a3dde4de2, type: 3}
   finishBlock: {fileID: 911363036348541477, guid: 10cc9b5af4c4c44ce909c75a61b1e01c, type: 3}
-  moveTime: 0.5
+  moveTime: 1
   btnPrefab: {fileID: 7373323298163969320, guid: e00e7616c56310643a376336e226b3c3, type: 3}
   rotateBtn: {fileID: 1969233852684768162, guid: 17ebd5e485f62f440a1383d3bcec92d2, type: 3}
   mazeUI: {fileID: 690898457}
@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 1411845813}
   - component: {fileID: 1411845812}
   - component: {fileID: 1411845814}
+  - component: {fileID: 1411845815}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -774,6 +775,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemies: []
+--- !u!114 &1411845815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411845810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e917c89b60d2ef044bfbe7d59225c6ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527259228
 GameObject:
   m_ObjectHideFlags: 0
