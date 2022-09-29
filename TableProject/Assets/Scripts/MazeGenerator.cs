@@ -30,13 +30,13 @@ public class MazeGenerator : MonoBehaviour
         this.rowLength = rowLength;
         this.blockWidth = blockWidth;
         mazeBlocks = new Transform[rowLength, columnLength];
-        mazeBlocks[0, 0] = Instantiate(playerBlock, Vector3.zero, Quaternion.identity, transform).transform;
+        mazeBlocks[0, 0] = Instantiate(playerBlock, transform).transform;
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
         mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(-90, 0,blockRotations[i - 1] * 90), transform);
+            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0,blockRotations[i - 1] * 90,0), transform);
             mazeBlocks[i / columnLength, i % columnLength] = block.transform;
         }
 
@@ -63,7 +63,7 @@ public class MazeGenerator : MonoBehaviour
 
         //place next block
         nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
-        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(-90, 0, 0), transform).transform;
+        nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(0, 0, 0), transform).transform;
         //nextBlock.localScale = Vector3.one * blockWidth;
 
         Instantiate(rotateBtn, new Vector3(nextBlockPos.x + blockWidth, 0, nextBlockPos.z), Quaternion.Euler(90, 0, 0), mazeUI);
@@ -85,6 +85,7 @@ public class MazeGenerator : MonoBehaviour
             if (moveNegDir) moveInNegativeDir(isRow, index, 0);
             else moveInPositiveDir(isRow, index, 0);
             Net_MoveMazeMsg msg = new Net_MoveMazeMsg(index, isRow, moveNegDir);
+            Debug.Log(index + " " + isRow + moveNegDir);
             BaseClient.instance.SendToServer(msg);
         }
     }
@@ -204,7 +205,7 @@ public class MazeGenerator : MonoBehaviour
     }
     public void rotateBlock()
     {
-        nextBlock.Rotate(0, 0, 90);
+        nextBlock.Rotate(0, 90, 0);
         BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
 
     }
