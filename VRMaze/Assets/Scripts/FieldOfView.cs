@@ -108,6 +108,7 @@ public class FieldOfView : MonoBehaviour
         if (other.gameObject.name == sword.name){
 
             Destroy(this.gameObject);
+            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z));
         }
     }
 }

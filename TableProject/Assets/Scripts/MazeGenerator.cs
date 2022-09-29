@@ -209,4 +209,11 @@ public class MazeGenerator : MonoBehaviour
         BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
 
     }
+    public void killEnemy(float posX, float posZ)
+    {
+        Debug.Log("kill enemy");
+        var column = (int)((posX + blockWidth / 2) / blockWidth);
+        var row = (int)((posZ + blockWidth / 2) / blockWidth);
+        Destroy(mazeBlocks[column, row].transform.Find("enemy")); 
+    }
 }

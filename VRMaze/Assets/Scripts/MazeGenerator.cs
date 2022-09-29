@@ -207,7 +207,11 @@ public class MazeGenerator : MonoBehaviour
         }
         generateMaze();
         sendToClient();
-        player = initPosPlayer;
+        Debug.Log(initPosPlayer.transform.position);
+        player.position = Vector3.zero;
+        player.rotation = Quaternion.identity;
+        Debug.Log(initPosPlayer.transform.position);
+
 
     }
     void movePlayerWithMaze()
