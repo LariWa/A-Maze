@@ -33,10 +33,11 @@ public class Net_KillEnemyMsg : NetMessage
     public override void ReceivedOnServer()
     {
         Debug.Log("SERVER: restart");
-        MazeGenerator.instance.killEnemy(posX, posZ);
     }
     public override void ReceivedOnClient()
     {
+        MazeGenerator.instance.killEnemy(posX, posZ);
+
         Debug.Log("Client: restart");
     }
 }

@@ -214,6 +214,6 @@ public class MazeGenerator : MonoBehaviour
         Debug.Log("kill enemy");
         var column = (int)((posX + blockWidth / 2) / blockWidth);
         var row = (int)((posZ + blockWidth / 2) / blockWidth);
-        Destroy(mazeBlocks[column, row].transform.Find("enemy")); 
+        Destroy(mazeBlocks[column, row].transform.Find("enemy").gameObject); 
     }
 }

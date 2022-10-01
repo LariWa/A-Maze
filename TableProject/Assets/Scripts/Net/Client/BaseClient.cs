@@ -11,6 +11,9 @@ public class BaseClient : MonoBehaviour
     protected NetworkConnection connection;
     public bool isConnected;
     public static BaseClient instance { get; private set; }
+    public float connectInterval = 1f;
+    private float lastTry;
+    string ipServer;
 
     private void Start()
     {
@@ -20,6 +23,16 @@ public class BaseClient : MonoBehaviour
     {
         if(connection.IsCreated)
         UpdateClient();
+        else if(timePassed())
+        {
+            lastTry = Time.time;
+            Init(ipServer);
+        }
+
+    }
+    bool timePassed()
+    {
+        return Time.time - lastTry > connectInterval;
     }
     private void OnDestroy()
     {
@@ -28,6 +41,7 @@ public class BaseClient : MonoBehaviour
     public virtual void Init(string ip)
     {
         //initialize driver
+        ipServer = ip;
         driver = NetworkDriver.Create();
         connection = default(NetworkConnection);
         NetworkEndPoint endpoint;
@@ -83,6 +97,7 @@ public class BaseClient : MonoBehaviour
             case OpCode.POSITION_MSG: msg = new Net_PositionMsg(stream); break;
             case OpCode.MAZE_GENERATION_MSG: msg = new Net_MazeGenerationMsg(stream); break;
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
+            case OpCode.KILLENEMY_MSG: msg = new Net_KillEnemyMsg(stream); break;
 
 
             default:
