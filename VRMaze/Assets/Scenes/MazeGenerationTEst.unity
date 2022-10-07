@@ -186,10 +186,10 @@ MonoBehaviour:
   - quantity: 1
     prefab: {fileID: 6421298190739081873, guid: f8c90fb6e71674224acf7a789acb66c1, type: 3}
   moveTime: 0.8
-  playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
+  playerBlock: {fileID: 8072762411319975446, guid: aa89d8cf7afff5aff85dda4967400326, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 768924483}
 --- !u!1 &483357474
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +284,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &768924483 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6298628177809393510, guid: 5c9db2dd18c769b4ba503e5c1829ad51, type: 3}
+  m_PrefabInstance: {fileID: 1772912541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1721249475
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +462,17 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a23fc27ff0ac16f27bfa537083cd4501, type: 3}
     volume: 0.269
     pitch: 1.01
+    source: {fileID: 0}
+  - name: spooky
+    clip: {fileID: 8300000, guid: 5af2a60ecf504dce9bd04a65d2c2bed3, type: 3}
+    volume: 0.959
+    pitch: 1.61
+    source: {fileID: 0}
+  theme:
+    name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
     source: {fileID: 0}
 --- !u!4 &1950046033
 Transform:
