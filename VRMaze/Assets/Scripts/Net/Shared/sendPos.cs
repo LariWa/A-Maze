@@ -24,10 +24,10 @@ public class sendPos : MonoBehaviour
         //{
             Net_PositionMsg msg;
             if (isPlayer)
-                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.position.x, transform.position.y, transform.position.z);
-            else 
-                msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.position.x, transform.position.y, transform.position.z);
-            server.SendToClient(msg);
+                msg = new Net_PositionMsg(objTypeCode.PLAYER, id, transform.position.x, transform.position.y, transform.position.z, transform.eulerAngles.y);
+        else
+            msg = new Net_PositionMsg(objTypeCode.ENEMY, id, transform.position.x, transform.position.y, transform.position.z, transform.rotation.y);
+        server.SendToClient(msg);
             lastSend = Time.time;
             prevPos = transform.position;
         //}
