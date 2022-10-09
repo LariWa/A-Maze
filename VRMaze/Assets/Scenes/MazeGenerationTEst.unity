@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658822, g: 0.49642307, b: 0.5748253, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -185,7 +185,7 @@ MonoBehaviour:
     prefab: {fileID: 7788696525458797388, guid: 6abeb1865e2ad43a786e43109e668e57, type: 3}
   - quantity: 1
     prefab: {fileID: 6421298190739081873, guid: f8c90fb6e71674224acf7a789acb66c1, type: 3}
-  moveTime: 0.8
+  moveTime: 1.9
   playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
@@ -457,6 +457,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a23fc27ff0ac16f27bfa537083cd4501, type: 3}
     volume: 0.269
     pitch: 1.01
+    source: {fileID: 0}
+  theme:
+    name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
     source: {fileID: 0}
 --- !u!4 &1950046033
 Transform:
