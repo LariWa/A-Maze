@@ -69,7 +69,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         //place next block
-        nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
+        nextBlockPos = new Vector3((rowLength +2) * blockWidth, 0, ((columnLength /2) * blockWidth));
         nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(0, 0, 0), transform).transform;
         //nextBlock.localScale = Vector3.one * blockWidth;
 
