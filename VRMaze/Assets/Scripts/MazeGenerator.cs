@@ -9,6 +9,7 @@ public class MazeGenerator : MonoBehaviour
 {
     public int columnLength, rowLength;
     public int blockWidth;
+    public float blockHeight;
     [Serializable]
     public struct MazeBlockPrefab
     {
@@ -92,19 +93,22 @@ public class MazeGenerator : MonoBehaviour
       //  player = mazeBlocks[0, 0].transform.Find("Player");
         //wallLeft
         var wallLeft = Instantiate(wall, transform);
-        wallLeft.transform.localScale = new Vector3(0.01f,  blockWidth, columnLength * blockWidth);
-        wallLeft.transform.position = new Vector3(-blockWidth/2f, blockWidth/2f, ((float)(columnLength  * blockWidth)/2)-blockWidth/2);
+        wallLeft.transform.localScale = new Vector3(0.01f,  blockHeight, columnLength * blockWidth);
+        wallLeft.transform.position = new Vector3(-blockWidth/2f, blockHeight/2f, ((float)(columnLength  * blockWidth)/2)-blockWidth/2);
 
         var wallRight = Instantiate(wall, transform);
-        wallRight.transform.localScale = new Vector3(0.01f, blockWidth, columnLength * blockWidth);
-        wallRight.transform.position = new Vector3(rowLength*blockWidth-blockWidth / 2f, blockWidth / 2f, ((float)(columnLength * blockWidth) / 2) - blockWidth / 2);
+        wallRight.transform.localScale = new Vector3(0.01f, blockHeight, columnLength * blockWidth);
+        wallRight.transform.position = new Vector3(rowLength*blockWidth-blockWidth / 2f, blockHeight / 2f, ((float)(columnLength * blockWidth) / 2) - blockWidth / 2);
 
         var wallDown = Instantiate(wall, transform);
-        wallDown.transform.localScale = new Vector3(rowLength * blockWidth, blockWidth, 0.01f );
-        wallDown.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) -blockWidth / 2,blockWidth/2, - blockWidth / 2);
+        wallDown.transform.localScale = new Vector3(rowLength * blockWidth, blockHeight, 0.01f );
+        wallDown.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) -blockWidth / 2,blockHeight/2, - blockWidth / 2);
+        Vector3 eulerRotation = transform.rotation.eulerAngles;
+        wallDown.transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 180);
+
         var wallUp = Instantiate(wall, transform);
-        wallUp.transform.localScale = new Vector3(rowLength * blockWidth, blockWidth, 0.01f);
-        wallUp.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) - blockWidth / 2, blockWidth / 2 ,columnLength * blockWidth - blockWidth / 2f);
+        wallUp.transform.localScale = new Vector3(rowLength * blockWidth, blockHeight, 0.01f);
+        wallUp.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) - blockWidth / 2, blockHeight / 2 ,columnLength * blockWidth - blockWidth / 2f);
     }
     void randomizeArray(GameObject[] array)
     {
