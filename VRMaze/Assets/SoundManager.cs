@@ -19,7 +19,8 @@ public class SoundManager : MonoBehaviour
             s.source.pitch = s.pitch;
         }
 
-        theme = Array.Find(sounds, sound => sound.name == "spooky");        
+        theme = Array.Find(sounds, sound => sound.name == "spooky");
+        theme.source.loop = true;        
         theme.source.Play();
     }
 

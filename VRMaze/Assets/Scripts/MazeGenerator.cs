@@ -27,6 +27,8 @@ public class MazeGenerator : MonoBehaviour
     public Transform player;
     Transform initPosPlayer;
 
+    public SoundManager soundManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class MazeGenerator : MonoBehaviour
         instance = this;
         generateMaze();
         initPosPlayer = player.transform;
+        soundManager = FindObjectOfType<SoundManager>();
     }
     void generateMaze()
     {
@@ -135,6 +138,8 @@ public class MazeGenerator : MonoBehaviour
             moveInNegativeDir(isRow, idx);
         else
             moveInPositiveDir(isRow, idx);
+
+        soundManager.Play("slideDoors");    
 
     }
     void moveInPositiveDir(bool isRow, int idx)//right or up
