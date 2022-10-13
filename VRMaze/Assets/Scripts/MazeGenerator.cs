@@ -20,7 +20,7 @@ public class MazeGenerator : MonoBehaviour
     public float moveTime = 5.0f;
     Net_MazeGenerationMsg msg;
     Transform nextBlock;
-    public GameObject playerBlock, finishBlock;
+    public GameObject playerBlock, finishBlock, dangerBlock;
     public static MazeGenerator instance { get; private set; }
     public GameObject wall;
     public Transform player;
@@ -52,7 +52,11 @@ public class MazeGenerator : MonoBehaviour
             {
                 if (idxAllMazeBlocks < columnLength * rowLength - 2)
                 {
-                    allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
+                    if (idxAllMazeBlocks == 1) {
+                        allMazeBlocks[idxAllMazeBlocks] = dangerBlock;
+                    } else {
+                        allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
+                    }
                     idxAllMazeBlocks++;
                 }
                 else

@@ -15,6 +15,7 @@ public class DangerRoom : MonoBehaviour
     public GameObject playerRef;
     public SoundManager soundManager;
     public Transform player;
+    public List<GameObject> spiderList;
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -27,11 +28,43 @@ public class DangerRoom : MonoBehaviour
     // 2 : Entered the room and doors have been closed
     private int playerPosStatus = 0; 
 
+    //Check if there is any live spider left
+    private bool anySpiderRemaining() 
+    {
+        foreach(GameObject spider in spiderList){
+            if (spider != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Activate all spiders
+    private void spawnSpiders()
+    {
+        foreach(GameObject spider in spiderList){
+            spider.SetActive(true);
+        }
+    }
+
     private void Start()
     {
         soundManager = FindObjectOfType<SoundManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animations =GetComponent<Animation>();
+
+        //Initiate the spiders list :  
+        //TODO : Mon dieu c'est dégeulasse, automatise had lkhra
+        int i = 1;
+        Transform currentSpider = transform.Find("Spider"+i.ToString());
+
+        while (currentSpider != null) {
+            currentSpider.gameObject.SetActive(false);
+            spiderList.Add(currentSpider.gameObject);
+
+            i++;
+            currentSpider = transform.Find("Spider"+i.ToString());
+        }
     }
 
 
@@ -58,7 +91,13 @@ public class DangerRoom : MonoBehaviour
             if (playerPosStatus == 1) {
                 animations.Play("closeDoors");
                 playerPosStatus = 2; //Change status so that the animation only plays once
+                this.spawnSpiders();
             }
+        }
+
+        //Open Doors when all spiders are killed
+        if (!anySpiderRemaining()) {
+            animations.Play("openDoors");
         }
     }
     

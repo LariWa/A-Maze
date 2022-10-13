@@ -186,8 +186,9 @@ MonoBehaviour:
   - quantity: 1
     prefab: {fileID: 6421298190739081873, guid: f8c90fb6e71674224acf7a789acb66c1, type: 3}
   moveTime: 0.8
-  playerBlock: {fileID: 8072762411319975446, guid: aa89d8cf7afff5aff85dda4967400326, type: 3}
+  playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
+  dangerBlock: {fileID: 8072762411319975446, guid: aa89d8cf7afff5aff85dda4967400326, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
   player: {fileID: 768924483}
 --- !u!1 &483357474
