@@ -4,9 +4,8 @@ public enum OpCode
     POSITION_MSG = 2,
     MAZE_GENERATION_MSG = 3,
     MOVE_MAZE_MSG = 4,
-    RESTART_MSG = 5,
-    ROTATEBLOCK_MSG = 6,
-    KILLENEMY_MSG = 7
+    KILLENEMY_MSG = 5,
+    CODE_MSG = 6,
 
 };
 public enum objTypeCode
@@ -14,4 +13,9 @@ public enum objTypeCode
     PLAYER = 1,
     ENEMY = 2,
     OBJECT = 3,
+}
+public enum actionTypeCode
+{
+    RESTART = 1,
+    ROTATE = 2
 }

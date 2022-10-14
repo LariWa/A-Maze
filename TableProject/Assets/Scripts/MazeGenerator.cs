@@ -142,7 +142,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 Destroy(mazeUI.GetChild(i).gameObject);
             }
-            BaseClient.instance.SendToServer(new Net_RestartMsg());
+            BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.RESTART));
 
         }
         //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)
@@ -236,7 +236,7 @@ public class MazeGenerator : MonoBehaviour
     public void rotateBlock()
     {
         nextBlock.Rotate(0, 90, 0);
-        BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
+        BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.ROTATE));
 
     }
     public void killEnemy(float posX, float posZ)
