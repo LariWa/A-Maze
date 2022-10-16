@@ -6,6 +6,7 @@ public enum OpCode
     MOVE_MAZE_MSG = 4,   
     KILLENEMY_MSG = 5,
     CODE_MSG=6,
+    OBJ_INNTERACTION_MSG=7
 
 };
 public enum objTypeCode
@@ -18,4 +19,9 @@ public enum actionTypeCode
 {
    RESTART=1,
    ROTATE=2
+}
+public enum pickUpObjCode
+{
+    TORCH=1,
+    SWORD=2
 }

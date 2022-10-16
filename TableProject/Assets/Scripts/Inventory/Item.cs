@@ -1,20 +1,9 @@
 using UnityEngine;
 
-
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory")]
 public class Item : ScriptableObject
 {
 
-	public string name;
-	public Sprite icon;            
-
-	public virtual void Use()
-	{
-		
-	}
-
-	public void RemoveFromInventory()
-	{
-		Inventory.instance.Remove(this);
-	}
-
+    public pickUpObjCode objCode;
+    public Sprite icon;
 }

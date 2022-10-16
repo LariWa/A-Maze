@@ -76,6 +76,7 @@ public class MazeGenerator : MonoBehaviour
         Instantiate(rotateBtn, new Vector3(nextBlockPos.x + blockWidth, 0, nextBlockPos.z), Quaternion.Euler(90, 0, 0), mazeUI);
 
         Debug.Log("btns created");
+        Inventory.instance.Init();
     }
     Button createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
     {

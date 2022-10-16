@@ -7,7 +7,9 @@ public class InventorySlot : MonoBehaviour
 {
 
     public Image icon;
-
+    public Image btn;
+    public Color inUse;
+    public Color neutral;
     Item item;
 
     public void AddItem(Item newItem)
@@ -15,21 +17,21 @@ public class InventorySlot : MonoBehaviour
         item = newItem;
         icon.sprite = item.icon;
         icon.enabled = true;
+        UseItem();
     }
 
-    public void ClearSlot()
+
+    public void ResetColor()
     {
-        item = null;
-        icon.sprite = null;
-        icon.enabled = false;
+        btn.color = neutral;
     }
-
     public void UseItem()
     {
         if (item != null)
         {
-            item.Use();
+            InventoryUI.instance.ResetColorInSlots();
+            btn.color = inUse;
+            BaseClient.instance.SendToServer(new Net_ObjInteraction_MSg(item.objCode, true));
         }
     }
-
 }

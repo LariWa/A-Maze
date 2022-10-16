@@ -5,32 +5,31 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
 
-	public GameObject inventoryUI;  
-	public Transform itemsParent;   
+    public GameObject inventoryUI;
+    public Transform itemsParent;
+    Inventory inventory;
+    public static InventoryUI instance;
+    public int index = 0;
 
-	Inventory inventory;   
+    void Start()
+    {
+        inventory = Inventory.instance;
+        instance = this;
+    }
 
-	void Start()
-	{
-		inventory = Inventory.instance;
-		inventory.onItemChangedCallback += UpdateUI;
-	}
-
-	public void UpdateUI()
-	{
-		InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
-
-		for (int i = 0; i < slots.Length; i++)
-		{
-			if (i < inventory.items.Count)
-			{
-				slots[i].AddItem(inventory.items[i]);
-			}
-			else
-			{
-				slots[i].ClearSlot();
-			}
-		}
-	}
+    public void addItemToUI(Item item)
+    {
+        InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
+        slots[index].AddItem(inventory.items[index]);
+        index++;
+    }
+    public void ResetColorInSlots()
+    {
+        InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
+        foreach (InventorySlot slot in slots)
+        {
+            slot.ResetColor();
+        }
+    }
 
 }

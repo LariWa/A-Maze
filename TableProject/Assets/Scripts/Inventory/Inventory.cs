@@ -1,31 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
-{    
+{
     public static Inventory instance;
+    public Dictionary<pickUpObjCode, GameObject> itemsInScene;
+
     void Awake()
     {
         instance = this;
-    }
-    public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallback;
+        itemsInScene = new Dictionary<pickUpObjCode, GameObject>();
 
+    }
     public List<Item> items = new List<Item>();
 
     public void Add(Item item)
     {
         items.Add(item);
-        if (onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+        InventoryUI.instance.addItemToUI(item);
     }
-    public void Remove(Item item)
+    public void Init()
     {
-        items.Remove(item);
-
-        if (onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+        var items = GameObject.FindGameObjectsWithTag("Item");
+        foreach (GameObject item in items)
+        {
+            itemsInScene.Add(item.GetComponent<ItemPickup>().item.objCode, item);
+        }
+    }
+    public void OnMsg(pickUpObjCode objCode, bool use)
+    {
+        var item = itemsInScene[objCode];
+        Add(item.GetComponent<ItemPickup>().item);
+        item.SetActive(false);
     }
 
 }

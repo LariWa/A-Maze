@@ -99,6 +99,7 @@ public class BaseClient : MonoBehaviour
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
             case OpCode.KILLENEMY_MSG: msg = new Net_KillEnemyMsg(stream); break;
             case OpCode.CODE_MSG: msg = new Net_MsgCode(stream); break;
+            case OpCode.OBJ_INNTERACTION_MSG: msg = new Net_ObjInteraction_MSg(stream); break;
 
 
             default:
