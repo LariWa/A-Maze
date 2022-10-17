@@ -11,7 +11,7 @@ public class MazeGenerator : MonoBehaviour
     private int columnLength, rowLength, blockWidth;
     public GameObject[] mazeBlocksToGenerate; //order needs to match order in VR project!!
     Transform[,] mazeBlocks;
-    public GameObject playerBlock, finishBlock;
+    public GameObject playerBlock, finishBlock, cornerBlock;
     public float moveTime = 0.5f;
     public static MazeGenerator instance { get; private set; }
     public GameObject btnPrefab;
@@ -39,8 +39,24 @@ public class MazeGenerator : MonoBehaviour
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
-            mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+            Vector3 pos = new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth);
+            if (i / columnLength == rowLength - 1 && i % columnLength == 0)
+            { //left upper corner block
+                Debug.Log("cornerblock");
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, 90, 0), transform);
+
+            }
+            else if (i % columnLength == columnLength - 1 && i / columnLength == 0)
+            {
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
+            }
+
+            else
+            {
+                GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], pos, Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
+                mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+            }
+
         }
 
         //place camera
@@ -69,7 +85,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         //place next block
-        nextBlockPos = new Vector3((rowLength +2) * blockWidth, 0, ((columnLength /2) * blockWidth));
+        nextBlockPos = new Vector3((rowLength + 2) * blockWidth, 0, ((columnLength / 2) * blockWidth));
         nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(0, 0, 0), transform).transform;
         //nextBlock.localScale = Vector3.one * blockWidth;
 
@@ -99,7 +115,7 @@ public class MazeGenerator : MonoBehaviour
         }
     }
     bool isPlayerInMovement(int index, bool isRow)
-    {       
+    {
         if (isRow) return rowIdx == index;
         else return columnIdx == index;
     }
@@ -108,17 +124,17 @@ public class MazeGenerator : MonoBehaviour
         var columnIdxNew = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
         var rowIdxNew = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
         if (columnIdxNew == columnIdx && rowIdxNew == rowIdx) return;
-        if (columnIdxNew != columnIdx&& columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)
+        if (columnIdxNew != columnIdx && columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)
             rowBtns[columnIdx, 0].interactable = rowBtns[columnIdx, 1].interactable = true;
         if (rowIdxNew != rowIdx && rowIdx > 0 && rowIdx < rowLength && columnBtns[rowIdx, 0] != null)
             columnBtns[rowIdx, 0].interactable = columnBtns[rowIdx, 1].interactable = true;
         columnIdx = columnIdxNew;
         rowIdx = rowIdxNew;
 
-        if (columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)        
-            rowBtns[columnIdx, 0].interactable =  rowBtns[columnIdx, 1].interactable = false;        
+        if (columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)
+            rowBtns[columnIdx, 0].interactable = rowBtns[columnIdx, 1].interactable = false;
         if (rowIdx > 0 && rowIdx < rowLength && columnBtns[rowIdx, 0] != null)
-            columnBtns[rowIdx, 0].interactable =  columnBtns[rowIdx, 1].interactable = false;
+            columnBtns[rowIdx, 0].interactable = columnBtns[rowIdx, 1].interactable = false;
 
     }
     // Update is called once per frame
