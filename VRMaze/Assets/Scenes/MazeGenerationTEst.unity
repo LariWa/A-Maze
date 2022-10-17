@@ -504,9 +504,10 @@ MonoBehaviour:
   moveTime: 1.9
   playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
+  cornerBlock: {fileID: 7922877679255181227, guid: 7b92269ed574c4666aa764569ce37769, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
   player: {fileID: 1193743745}
-  soundManager: {fileID: 0}
+  soundManager: {fileID: 1950046032}
 --- !u!1 &560323045
 GameObject:
   m_ObjectHideFlags: 0
