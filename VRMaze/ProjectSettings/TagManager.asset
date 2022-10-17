@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spider
+  - Gate
   - Lamp
   layers:
   - Default
