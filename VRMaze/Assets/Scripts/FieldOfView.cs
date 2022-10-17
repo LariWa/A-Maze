@@ -108,13 +108,13 @@ public class FieldOfView : MonoBehaviour
             */
             //animations.Play("Spider_Armature_run_ani_attack");
 
-            if (distanceToTarget > 0.2f){
+            if (distanceToTarget > 0.3f){
                 
                 transform.position += new Vector3(directionToTarget.x/300, 0, directionToTarget.z/300) ;
             }
 
             float angle2 = Vector3.Angle(new Vector3(directionToTarget.x,0,directionToTarget.z), -transform.forward);
-            if (angle2 > 2f)
+            if (angle2 > 2f || angle2 < -2f)
             {
                 transform.Rotate(0,angle2,0);
 
