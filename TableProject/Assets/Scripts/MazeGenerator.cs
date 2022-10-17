@@ -4,20 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MazeGenerator : MonoBehaviour
 {
     private int columnLength, rowLength, blockWidth;
     public GameObject[] mazeBlocksToGenerate; //order needs to match order in VR project!!
     Transform[,] mazeBlocks;
-    public GameObject playerBlock, finishBlock;
+    public GameObject playerBlock, finishBlock, cornerBlock;
     public float moveTime = 0.5f;
     public static MazeGenerator instance { get; private set; }
     public GameObject btnPrefab;
     public GameObject rotateBtn;
     public Transform mazeUI;
-   public Transform nextBlock;
+    public Transform nextBlock;
     Vector3 nextBlockPos;
+    public Button[,] columnBtns, rowBtns;
+    int columnIdx, rowIdx;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +39,24 @@ public class MazeGenerator : MonoBehaviour
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
-            GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth), Quaternion.Euler(0,blockRotations[i - 1] * 90,0), transform);
-            mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+            Vector3 pos = new Vector3(i / columnLength * blockWidth, 0, i % columnLength * blockWidth);
+            if (i / columnLength == rowLength - 1 && i % columnLength == 0)
+            { //left upper corner block
+                Debug.Log("cornerblock");
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, 90, 0), transform);
+
+            }
+            else if (i % columnLength == columnLength - 1 && i / columnLength == 0)
+            {
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
+            }
+
+            else
+            {
+                GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], pos, Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
+                mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+            }
+
         }
 
         //place camera
@@ -45,41 +64,47 @@ public class MazeGenerator : MonoBehaviour
 
         //place movement btns 
         //for rows
+
+        columnBtns = new Button[rowLength, 2];
+        rowBtns = new Button[columnLength, 2];
+
         for (int i = 1; i < columnLength - 1; i++)
         {
             //right
-            createBtn(blockWidth, new Vector3(-blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, -90), i, true, false);
+            columnBtns[i, 0] = createBtn(blockWidth, new Vector3(-blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, -90), i, true, false).GetComponent<Button>();
             //left
-            createBtn(blockWidth, new Vector3(rowLength * blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, 90), i, true, true);
+            columnBtns[i, 1] = createBtn(blockWidth, new Vector3(rowLength * blockWidth, 0, i * blockWidth), Quaternion.Euler(90, 0, 90), i, true, true);
         }
         //for columns
         for (int i = 1; i < rowLength - 1; i++)
         {
             //up
-            createBtn(blockWidth, new Vector3(i * blockWidth, 0, -blockWidth), Quaternion.Euler(90, 0, 0), i, false, false);
+            rowBtns[i, 0] = createBtn(blockWidth, new Vector3(i * blockWidth, 0, -blockWidth), Quaternion.Euler(90, 0, 0), i, false, false);
             //down
-            createBtn(blockWidth, new Vector3(i * blockWidth, 0, columnLength * blockWidth), Quaternion.Euler(90, 0, 180), i, false, true);
+            rowBtns[i, 1] = createBtn(blockWidth, new Vector3(i * blockWidth, 0, columnLength * blockWidth), Quaternion.Euler(90, 0, 180), i, false, true);
         }
 
         //place next block
-        nextBlockPos = new Vector3((rowLength + 0.5f) * blockWidth, 0, ((columnLength + 0.5f) * blockWidth));
+        nextBlockPos = new Vector3((rowLength + 2) * blockWidth, 0, ((columnLength / 2) * blockWidth));
         nextBlock = Instantiate(mazeBlocksToGenerate[0], nextBlockPos, Quaternion.Euler(0, 0, 0), transform).transform;
         //nextBlock.localScale = Vector3.one * blockWidth;
 
         Instantiate(rotateBtn, new Vector3(nextBlockPos.x + blockWidth, 0, nextBlockPos.z), Quaternion.Euler(90, 0, 0), mazeUI);
 
-
+        Debug.Log("btns created");
+        Inventory.instance.Init();
     }
-    void createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
+    Button createBtn(int blockWidth, Vector3 pos, Quaternion rot, int index, bool isRow, bool moveNegDir)
     {
         var btn = Instantiate(btnPrefab, pos, rot, mazeUI);
         btn.transform.localScale = Vector3.one * blockWidth;
         btn.GetComponent<moveBtn>().Init(index, isRow, moveNegDir);
+        return btn.GetComponent<Button>();
     }
     public void move(int index, bool isRow, bool moveNegDir)
     {
-    
-        if ((nextBlock.position == nextBlockPos) && !isPlayerInMovement(index, isRow))
+
+        if ((nextBlock.position == nextBlockPos))
         {
             //movePlayerWithMaze();
             if (moveNegDir) moveInNegativeDir(isRow, index, 0);
@@ -91,14 +116,36 @@ public class MazeGenerator : MonoBehaviour
     }
     bool isPlayerInMovement(int index, bool isRow)
     {
-        var column = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
-        var row = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
-        if (isRow) return row == index;
-        else return column == index;
+        if (isRow) return rowIdx == index;
+        else return columnIdx == index;
+    }
+    void disableBtnsWithPlayer()
+    {
+        var columnIdxNew = (int)((PositionManager.instance.player.position.x + blockWidth / 2) / blockWidth);
+        var rowIdxNew = (int)((PositionManager.instance.player.position.z + blockWidth / 2) / blockWidth);
+        if (columnIdxNew == columnIdx && rowIdxNew == rowIdx) return;
+        if (columnIdxNew != columnIdx && columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)
+            rowBtns[columnIdx, 0].interactable = rowBtns[columnIdx, 1].interactable = true;
+        if (rowIdxNew != rowIdx && rowIdx > 0 && rowIdx < rowLength && columnBtns[rowIdx, 0] != null)
+            columnBtns[rowIdx, 0].interactable = columnBtns[rowIdx, 1].interactable = true;
+        columnIdx = columnIdxNew;
+        rowIdx = rowIdxNew;
+
+        if (columnIdx > 0 && columnIdx < columnLength && rowBtns[columnIdx, 0] != null)
+            rowBtns[columnIdx, 0].interactable = rowBtns[columnIdx, 1].interactable = false;
+        if (rowIdx > 0 && rowIdx < rowLength && columnBtns[rowIdx, 0] != null)
+            columnBtns[rowIdx, 0].interactable = columnBtns[rowIdx, 1].interactable = false;
+
     }
     // Update is called once per frame
     void Update()
     {
+        //Disable btns for row/column player is on
+        if (PositionManager.instance.player && rowBtns.Length > 0)
+            disableBtnsWithPlayer();
+
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("restart");
@@ -112,7 +159,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 Destroy(mazeUI.GetChild(i).gameObject);
             }
-            BaseClient.instance.SendToServer(new Net_RestartMsg());
+            BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.RESTART));
 
         }
         //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)
@@ -206,7 +253,7 @@ public class MazeGenerator : MonoBehaviour
     public void rotateBlock()
     {
         nextBlock.Rotate(0, 90, 0);
-        BaseClient.instance.SendToServer(new Net_RotateBlockMsg());
+        BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.ROTATE));
 
     }
     public void killEnemy(float posX, float posZ)
@@ -214,6 +261,6 @@ public class MazeGenerator : MonoBehaviour
         Debug.Log("kill enemy");
         var column = (int)((posX + blockWidth / 2) / blockWidth);
         var row = (int)((posZ + blockWidth / 2) / blockWidth);
-        Destroy(mazeBlocks[column, row].transform.Find("enemy").gameObject); 
+        Destroy(mazeBlocks[column, row].transform.Find("enemy").gameObject);
     }
 }

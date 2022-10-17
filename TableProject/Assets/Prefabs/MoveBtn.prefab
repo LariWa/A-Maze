@@ -148,4 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   isRow: 0
-  moveLeft: 0
+  moveNegDir: 0

@@ -92,9 +92,8 @@ public class BaseServer : MonoBehaviour
             case OpCode.CHAT_MESSAGE: msg = new Net_ChatMessage(stream); break;
             case OpCode.POSITION_MSG: msg = new Net_PositionMsg(stream); break;
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
-            case OpCode.RESTART_MSG: msg = new Net_RestartMsg(stream); break;
-            case OpCode.ROTATEBLOCK_MSG: msg = new Net_RotateBlockMsg(stream); break;
-
+            case OpCode.CODE_MSG: msg = new Net_MsgCode(stream); break;
+            case OpCode.OBJ_INNTERACTION_MSG: msg = new Net_ObjInteraction_MSg(stream); break;
 
             default:
                 Debug.Log("message received had no OpCode");
@@ -103,9 +102,10 @@ public class BaseServer : MonoBehaviour
         msg.ReceivedOnServer();
 
     }
-    public virtual void SendToClient(NetMessage msg) {
+    public virtual void SendToClient(NetMessage msg)
+    {
         DataStreamWriter writer;
-        if (connections.Length>0)
+        if (connections.Length > 0)
         {
             driver.BeginSend(connections[0], out writer); //for now only one client
             msg.Serialize(ref writer);

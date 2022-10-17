@@ -7,6 +7,8 @@ TagManager:
   - Spider
   - Potion
   - GreenLight
+  - Gate
+  - Lamp
   layers:
   - Default
   - TransparentFX

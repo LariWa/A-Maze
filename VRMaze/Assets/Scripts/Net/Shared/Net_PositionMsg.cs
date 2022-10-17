@@ -13,6 +13,7 @@ public class Net_PositionMsg : NetMessage
     public float posY { set; get; }
 
     public float posZ { set; get; }
+    public float rotY;
 
     public objTypeCode objType;
 
@@ -25,7 +26,7 @@ public class Net_PositionMsg : NetMessage
         Code = OpCode.POSITION_MSG;
         Deserialize(reader);
     }
-    public Net_PositionMsg(objTypeCode objectType, int id, float x, float y, float z)
+    public Net_PositionMsg(objTypeCode objectType, int id, float x, float y, float z, float rotY)
     {
         Code = OpCode.POSITION_MSG;
         objType = objectType;
@@ -33,6 +34,7 @@ public class Net_PositionMsg : NetMessage
         posX = x;
         posY = y;
         posZ = z;
+        this.rotY = rotY;
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
@@ -42,6 +44,8 @@ public class Net_PositionMsg : NetMessage
         writer.WriteFloat(posX);
         writer.WriteFloat(posY);
         writer.WriteFloat(posZ);
+        writer.WriteFloat(rotY);
+
 
     }
     public override void Deserialize(DataStreamReader reader)
