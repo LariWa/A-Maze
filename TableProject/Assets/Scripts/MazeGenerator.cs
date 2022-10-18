@@ -167,6 +167,11 @@ public class MazeGenerator : MonoBehaviour
             }
             BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.RESTART));
 
+            //reset inventory;
+            Inventory.instance.Reset();
+
+            //TODO reset riddle canvases?
+
         }
         //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)
         //{

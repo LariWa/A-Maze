@@ -33,5 +33,10 @@ public class Inventory : MonoBehaviour
         Add(item.GetComponent<ItemPickup>().item);
         item.SetActive(false);
     }
+    public void Reset()
+    {
+        items = new List<Item>();
+        InventoryUI.instance.clear();
+    }
 
 }

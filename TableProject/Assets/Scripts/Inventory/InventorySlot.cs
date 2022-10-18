@@ -34,4 +34,10 @@ public class InventorySlot : MonoBehaviour
             BaseClient.instance.SendToServer(new Net_ObjInteraction_MSg(item.objCode, true));
         }
     }
+    public void reset()
+    {
+        item = null;
+        icon.sprite = null;
+        icon.enabled = false;
+    }
 }

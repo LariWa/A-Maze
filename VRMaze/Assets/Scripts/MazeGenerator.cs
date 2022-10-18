@@ -28,6 +28,7 @@ public class MazeGenerator : MonoBehaviour
     Transform initPosPlayer;
 
     public SoundManager soundManager;
+    public Transform rightController;
 
 
     // Start is called before the first frame update
@@ -90,7 +91,7 @@ public class MazeGenerator : MonoBehaviour
             }
             else if ((i + 1) % columnLength == columnLength - 1 && (i + 1) / columnLength == 0)
             {
-                 Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
             }
 
             else
@@ -98,7 +99,7 @@ public class MazeGenerator : MonoBehaviour
                 GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, 0, 0), transform);
                 if (block.transform.Find("Spider1"))
                 {
-                    block.transform.Find("Spider1").GetComponent<FieldOfView>().id = i+1;
+                    block.transform.Find("Spider1").GetComponent<FieldOfView>().id = i + 1;
                 }
                 mazeBlocks[(i + 1) / columnLength, (i + 1) % columnLength] = block.transform; //0 is player block
             }
@@ -240,14 +241,15 @@ public class MazeGenerator : MonoBehaviour
         player.rotation = Quaternion.identity;
         Debug.Log(initPosPlayer.transform.position);
 
+        // remove all weapons from player
+        foreach (Transform child in rightController)
+        {
+            if (child.gameObject.name != "XRControllerRight")
+                Destroy(child.gameObject);
+        }
 
-    }
-    void movePlayerWithMaze()
-    {
-        //  var column = (int)((player.position.x + blockWidth / 2) / blockWidth);
-        //  var row = (int)((player.position.z + blockWidth / 2) / blockWidth);
-        //  Debug.Log(column + " " + row);
-        //player.parent = mazeBlocks[column, row];
+        //reset health bar
+        healthBar.instance.resetHealthBar();
     }
     public void rotateBlock()
     {
