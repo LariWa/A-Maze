@@ -22,7 +22,7 @@ public class Net_MsgCode : NetMessage
 
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteByte((byte)actionType);
     }
     public override void Deserialize(DataStreamReader reader)

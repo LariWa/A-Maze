@@ -30,7 +30,7 @@ public class Net_MoveMazeMsg : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteInt(index);
         writer.WriteInt(moveLeft ? 1 : 0);
         writer.WriteInt(isRow ? 1 : 0);

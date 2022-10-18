@@ -38,7 +38,7 @@ public class Net_PositionMsg : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteByte((byte)objType);
         writer.WriteInt(id);
         writer.WriteFloat(posX);

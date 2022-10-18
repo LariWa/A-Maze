@@ -38,7 +38,7 @@ public class Net_MazeGenerationMsg : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteInt(columnLength);
         writer.WriteInt(rowLength);
         writer.WriteInt(blockWidth);

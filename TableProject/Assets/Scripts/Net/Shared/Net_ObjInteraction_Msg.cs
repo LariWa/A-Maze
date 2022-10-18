@@ -27,7 +27,7 @@ public class Net_ObjInteraction_MSg : NetMessage
 
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteByte((byte)objCode);
 
         writer.WriteInt(useObj ? 1 : 0);

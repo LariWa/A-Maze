@@ -25,7 +25,7 @@ public class Net_KillEnemyMsg : NetMessage
 
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteFloat(posX);
         writer.WriteFloat(posZ);
     }
