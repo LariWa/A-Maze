@@ -21,6 +21,7 @@ public class MazeGenerator : MonoBehaviour
     Vector3 nextBlockPos;
     public Button[,] columnBtns, rowBtns;
     int columnIdx, rowIdx;
+    public GameObject[] enemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class MazeGenerator : MonoBehaviour
         mazeBlocks[0, 0] = Instantiate(playerBlock, transform).transform;
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
         mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
+        enemies = new GameObject[columnLength * rowLength];
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
@@ -55,6 +57,10 @@ public class MazeGenerator : MonoBehaviour
             {
                 GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], pos, Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
                 mazeBlocks[i / columnLength, i % columnLength] = block.transform;
+                if (block.transform.Find("enemy"))
+                {
+                    enemies[i]=(block.transform.Find("enemy").gameObject);
+                }
             }
 
         }
@@ -256,11 +262,11 @@ public class MazeGenerator : MonoBehaviour
         BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.ROTATE));
 
     }
-    public void killEnemy(float posX, float posZ)
+    public void killEnemy(int index)
     {
         Debug.Log("kill enemy");
-        var column = (int)((posX + blockWidth / 2) / blockWidth);
-        var row = (int)((posZ + blockWidth / 2) / blockWidth);
-        Destroy(mazeBlocks[column, row].transform.Find("enemy").gameObject);
+        //var column = (int)((posX + blockWidth / 2) / blockWidth);
+        //var row = (int)((posZ + blockWidth / 2) / blockWidth);
+        Destroy(enemies[index]);
     }
 }

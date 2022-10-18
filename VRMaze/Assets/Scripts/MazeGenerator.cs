@@ -86,6 +86,7 @@ public class MazeGenerator : MonoBehaviour
                 Debug.Log("cornerblock");
                 Instantiate(cornerBlock, pos, Quaternion.Euler(0, 90, 0), transform);
 
+
             }
             else if ((i + 1) % columnLength == columnLength - 1 && (i + 1) / columnLength == 0)
             {
@@ -95,7 +96,10 @@ public class MazeGenerator : MonoBehaviour
             else
             {
                 GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, 0, 0), transform);
-
+                if (block.transform.Find("Spider1"))
+                {
+                    block.transform.Find("Spider1").GetComponent<FieldOfView>().id = i+1;
+                }
                 mazeBlocks[(i + 1) / columnLength, (i + 1) % columnLength] = block.transform; //0 is player block
             }
         }

@@ -28,6 +28,7 @@ public class FieldOfView : MonoBehaviour
     float distance = 0;
     public GameObject sword;
     public Slider lifeBar;
+    public int id;
 
     private void Start()
     {
@@ -146,7 +147,7 @@ public class FieldOfView : MonoBehaviour
                 WaitForAnimation(animations);
                 Destroy(this.gameObject);
             }
-            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z));
+            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z, id));
         }
     }
 
