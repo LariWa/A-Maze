@@ -94,6 +94,7 @@ public class BaseServer : MonoBehaviour
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
             case OpCode.RESTART_MSG: msg = new Net_RestartMsg(stream); break;
             case OpCode.ROTATEBLOCK_MSG: msg = new Net_RotateBlockMsg(stream); break;
+            case OpCode.RIDDLE_ANSWER_MSG: msg = new Net_RiddleAnswerMsg(stream); break;
 
 
             default:

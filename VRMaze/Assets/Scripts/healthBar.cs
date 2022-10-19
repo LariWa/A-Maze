@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class healthBar : MonoBehaviour
 {
     Image HealthBar;
-    Mouvement player;
+    public Mouvement player;
     float fillAmount;
     int spidersNb;
     public Text dead;

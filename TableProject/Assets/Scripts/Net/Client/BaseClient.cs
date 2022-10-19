@@ -98,8 +98,9 @@ public class BaseClient : MonoBehaviour
             case OpCode.MAZE_GENERATION_MSG: msg = new Net_MazeGenerationMsg(stream); break;
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
             case OpCode.KILLENEMY_MSG: msg = new Net_KillEnemyMsg(stream); break;
-
-
+            case OpCode.FOUND_RIDDLE_MSG: msg = new Net_FoundRiddleMsg(stream); break;
+            case OpCode.RIDDLE_ANSWER_MSG: msg = new Net_RiddleAnswerMsg(stream); break;
+            
             default:
                 Debug.Log("message received had no OpCode");
                 break;

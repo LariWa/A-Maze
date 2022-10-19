@@ -6,7 +6,9 @@ public enum OpCode
     MOVE_MAZE_MSG = 4,
     RESTART_MSG = 5,
     ROTATEBLOCK_MSG = 6,
-    KILLENEMY_MSG = 7
+    KILLENEMY_MSG = 7,
+    FOUND_RIDDLE_MSG = 8,
+    RIDDLE_ANSWER_MSG = 9,
 
 };
 public enum objTypeCode
