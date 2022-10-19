@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using UnityEngine.UI;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class FieldOfView : MonoBehaviour
     public float speed = 5f;
     float distance = 0;
     public GameObject sword;
+    public Slider lifeBar;
+    public int id;
+
     private void Start()
     {
         soundManager = FindObjectOfType<SoundManager>();
@@ -78,7 +82,8 @@ public class FieldOfView : MonoBehaviour
                 soundManager.Stop("chase");
             }
         }
-        else if (canSeePlayer){
+        else if (canSeePlayer)
+        {
             canSeePlayer = false;
             discoverPlayer = 0;
             soundManager.Stop("chase");
@@ -86,27 +91,31 @@ public class FieldOfView : MonoBehaviour
 
 
 
-/*        material =GetComponent<Renderer>().material;
-*/      animations =GetComponent<Animation>();
+        /*        material =GetComponent<Renderer>().material;
+        */
+        animations =GetComponent<Animation>();
         //Scream if it's the spider's first time seeing the player 
-        if (discoverPlayer == 1) {
+        if (discoverPlayer == 1)
+        {
             soundManager.Play("scream");
             soundManager.Play("chase");
             discoverPlayer = 2;
         }
 
+        animations.Play("Spider_Armature_run_ani_normal");
         if (canSeePlayer)
         {
-/*            material.color = Color.red;
-*/          
-            animations.Play("Spider_Armature_run_ani_attack");
-            if (distanceToTarget > 0.2f){
+            /*            material.color = Color.red;
+            */
+            //animations.Play("Spider_Armature_run_ani_attack");
 
+            if (distanceToTarget > 0.3f){
+                
                 transform.position += new Vector3(directionToTarget.x/300, 0, directionToTarget.z/300) ;
             }
 
             float angle2 = Vector3.Angle(new Vector3(directionToTarget.x,0,directionToTarget.z), -transform.forward);
-            if (angle2 > 2f)
+            if (angle2 > 2f || angle2 < -2f)
             {
                 transform.Rotate(0,angle2,0);
 
@@ -117,22 +126,36 @@ public class FieldOfView : MonoBehaviour
         {
            distance -= speed * Time.deltaTime;
            transform.position = pathCreator.path.GetPointAtDistance(distance);
-           animations.Play("Spider_Armature_run_ani_normal");
            transform.rotation = pathCreator.path.GetRotationAtDistance(distance) ;
 
             // transform.rotation = Quaternion.Euler(0,diff,0);
             // transform.Rotate(0,diff,0);
 
         }
+
+
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == sword.name){
-
-            Destroy(this.gameObject);
-            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z));
+        if (other.gameObject.tag == "Weapon"){
+            lifeBar.value -= 0.3f;
+            if (lifeBar.value <= 0)
+            {
+               // animations.Play("Spider_Armature|die");
+                WaitForAnimation(animations);
+                Destroy(this.gameObject);
+            }
+            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z, id));
         }
+    }
+
+    private IEnumerator WaitForAnimation(Animation anim)
+    {
+        do
+        {
+            yield return null;
+        } while (anim.isPlaying);
     }
 }

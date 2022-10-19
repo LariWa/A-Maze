@@ -13,6 +13,7 @@ public class Net_PositionMsg : NetMessage
     public float posY { set; get; }
 
     public float posZ { set; get; }
+    public float rotY;
 
     public objTypeCode objType;
 
@@ -25,23 +26,26 @@ public class Net_PositionMsg : NetMessage
         Code = OpCode.POSITION_MSG;
         Deserialize(reader);
     }
-    public Net_PositionMsg(objTypeCode objectType, int id, float x, float y, float z)
+    public Net_PositionMsg(objTypeCode objectType, int id, float x, float y, float z, float rotY)
     {
         Code = OpCode.POSITION_MSG;
         objType = objectType;
-        id = id;
+        this.id = id;
         posX = x;
         posY = y;
         posZ = z;
+        this.rotY = rotY;
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteByte((byte)objType);
         writer.WriteInt(id);
         writer.WriteFloat(posX);
         writer.WriteFloat(posY);
         writer.WriteFloat(posZ);
+        writer.WriteFloat(rotY);
+
 
     }
     public override void Deserialize(DataStreamReader reader)
@@ -52,6 +56,7 @@ public class Net_PositionMsg : NetMessage
         posX = reader.ReadFloat();
         posY = reader.ReadFloat();
         posZ = reader.ReadFloat();
+        rotY = reader.ReadFloat();
 
 
     }
@@ -61,11 +66,10 @@ public class Net_PositionMsg : NetMessage
     }
     public override void ReceivedOnClient()
     {
-
         if (objType == objTypeCode.PLAYER)
-            PositionManager.instance.updatePlayerPos(new Vector3(posX, posY, posZ));
-        else if (objType == objTypeCode.ENEMY)
-            PositionManager.instance.updateEnemyPos(id, new Vector3(posX, posY, posZ));
+            PositionManager.instance.updatePlayerPos(new Vector3(posX, posY, posZ), rotY);
+        //else if (objType == objTypeCode.ENEMY)
+        //    PositionManager.instance.updateEnemyPos(id, new Vector3(posX, posY, posZ), rotY);
 
     }
 }

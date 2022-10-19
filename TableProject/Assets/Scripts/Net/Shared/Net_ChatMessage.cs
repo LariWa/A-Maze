@@ -25,7 +25,7 @@ public class Net_ChatMessage : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteFixedString128(ChatMessage);
     }
     public override void Deserialize(DataStreamReader reader)

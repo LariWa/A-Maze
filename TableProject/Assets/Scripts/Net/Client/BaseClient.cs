@@ -90,7 +90,7 @@ public class BaseClient : MonoBehaviour
     public virtual void OnData(DataStreamReader stream)
     {
         NetMessage msg = null;
-        var opCode = (OpCode)stream.ReadByte();
+        var opCode = (OpCode)stream.ReadInt();
         switch (opCode)
         {
             case OpCode.CHAT_MESSAGE: msg = new Net_ChatMessage(stream); break;
@@ -98,6 +98,8 @@ public class BaseClient : MonoBehaviour
             case OpCode.MAZE_GENERATION_MSG: msg = new Net_MazeGenerationMsg(stream); break;
             case OpCode.MOVE_MAZE_MSG: msg = new Net_MoveMazeMsg(stream); break;
             case OpCode.KILLENEMY_MSG: msg = new Net_KillEnemyMsg(stream); break;
+            case OpCode.CODE_MSG: msg = new Net_MsgCode(stream); break;
+            case OpCode.OBJ_INNTERACTION_MSG: msg = new Net_ObjInteraction_MSg(stream); break;
             case OpCode.FOUND_RIDDLE_MSG: msg = new Net_FoundRiddleMsg(stream); break;
             case OpCode.RIDDLE_ANSWER_MSG: msg = new Net_RiddleAnswerMsg(stream); break;
             
