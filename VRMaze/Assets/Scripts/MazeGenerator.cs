@@ -95,7 +95,7 @@ public class MazeGenerator : MonoBehaviour
 
             else
             {
-                GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, 0, 0), transform);
+                GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, rot * 90, 0), transform);
                 if (block.transform.Find("Spider1"))
                 {
                     block.transform.Find("Spider1").GetComponent<FieldOfView>().id = i + 1;
