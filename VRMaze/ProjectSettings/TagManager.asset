@@ -9,6 +9,7 @@ TagManager:
   - GreenLight
   - Gate
   - Lamp
+  - Weapon
   layers:
   - Default
   - TransparentFX

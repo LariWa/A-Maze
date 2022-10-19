@@ -86,16 +86,20 @@ public class MazeGenerator : MonoBehaviour
                 Debug.Log("cornerblock");
                 Instantiate(cornerBlock, pos, Quaternion.Euler(0, 90, 0), transform);
 
+
             }
             else if ((i + 1) % columnLength == columnLength - 1 && (i + 1) / columnLength == 0)
             {
-                 Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
+                Instantiate(cornerBlock, pos, Quaternion.Euler(0, -90, 0), transform);
             }
 
             else
             {
-                GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, 0, 0), transform);
-
+                GameObject block = Instantiate(allMazeBlocks[i], pos, Quaternion.Euler(0, rot * 90, 0), transform);
+                if (block.transform.Find("Spider1"))
+                {
+                    block.transform.Find("Spider1").GetComponent<FieldOfView>().id = i + 1;
+                }
                 mazeBlocks[(i + 1) / columnLength, (i + 1) % columnLength] = block.transform; //0 is player block
             }
         }
@@ -231,19 +235,14 @@ public class MazeGenerator : MonoBehaviour
         }
         generateMaze();
         sendToClient();
-        Debug.Log(initPosPlayer.transform.position);
         player.position = Vector3.zero;
         player.rotation = Quaternion.identity;
-        Debug.Log(initPosPlayer.transform.position);
 
+        // remove all weapons from player
+        ObjManager.instance.Reset();
 
-    }
-    void movePlayerWithMaze()
-    {
-        //  var column = (int)((player.position.x + blockWidth / 2) / blockWidth);
-        //  var row = (int)((player.position.z + blockWidth / 2) / blockWidth);
-        //  Debug.Log(column + " " + row);
-        //player.parent = mazeBlocks[column, row];
+        //reset health bar
+        healthBar.instance.resetHealthBar();
     }
     public void rotateBlock()
     {

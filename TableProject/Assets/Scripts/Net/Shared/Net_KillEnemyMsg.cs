@@ -8,18 +8,20 @@ public class Net_KillEnemyMsg : NetMessage
 {
     public float posX { set; get; }
     public float posZ { set; get; }
-
-    public Net_KillEnemyMsg(float x,  float z)
+    public int index;
+    public Net_KillEnemyMsg(float x, float z, int idx)
     {
         Code = OpCode.KILLENEMY_MSG;
-            posX = x;
-            posZ = z;
-        }
+        posX = x;
+        posZ = z;
+        index = idx;
+    }
     public Net_KillEnemyMsg(DataStreamReader reader)
     {
         Code = OpCode.KILLENEMY_MSG;
         posX = reader.ReadFloat();
         posZ = reader.ReadFloat();
+        index = reader.ReadInt();
         Deserialize(reader);
     }
 
@@ -28,6 +30,7 @@ public class Net_KillEnemyMsg : NetMessage
         writer.WriteInt((int)Code);
         writer.WriteFloat(posX);
         writer.WriteFloat(posZ);
+        writer.WriteInt(index);
     }
 
     public override void ReceivedOnServer()
@@ -36,7 +39,7 @@ public class Net_KillEnemyMsg : NetMessage
     }
     public override void ReceivedOnClient()
     {
-        MazeGenerator.instance.killEnemy(posX, posZ);
+        MazeGenerator.instance.killEnemy(index);
 
         Debug.Log("Client: restart");
     }

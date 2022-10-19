@@ -28,6 +28,7 @@ public class FieldOfView : MonoBehaviour
     float distance = 0;
     public GameObject sword;
     public Slider lifeBar;
+    public int id;
 
     private void Start()
     {
@@ -138,7 +139,7 @@ public class FieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == sword.name){
+        if (other.gameObject.tag == "Weapon"){
             lifeBar.value -= 0.3f;
             if (lifeBar.value <= 0)
             {
@@ -146,7 +147,7 @@ public class FieldOfView : MonoBehaviour
                 WaitForAnimation(animations);
                 Destroy(this.gameObject);
             }
-            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z));
+            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z, id));
         }
     }
 

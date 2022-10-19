@@ -25,6 +25,14 @@ public class ObjManager : MonoBehaviour
         }
         objs.Add(newObj);
     }
+    public void Reset()
+    {
+        foreach (GameObject obj in objs)
+        {
+            Destroy(obj);
+        }
+        objs = new List<GameObject>();
+    }
     public void use(pickUpObjCode useObj)
     {
         foreach (GameObject obj in objs)

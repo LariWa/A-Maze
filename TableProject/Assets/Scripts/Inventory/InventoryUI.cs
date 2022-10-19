@@ -31,5 +31,13 @@ public class InventoryUI : MonoBehaviour
             slot.ResetColor();
         }
     }
+    public void clear()
+    {
+        InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
+        foreach (InventorySlot slot in slots)
+        {
+            slot.reset();
+        }
+    }
 
 }
