@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
     void Awake()
     {
         instance = this;
-        itemsInScene = new Dictionary<pickUpObjCode, GameObject>();
 
     }
     public List<Item> items = new List<Item>();
@@ -21,6 +20,8 @@ public class Inventory : MonoBehaviour
     }
     public void Init()
     {
+        itemsInScene = new Dictionary<pickUpObjCode, GameObject>();
+
         var items = GameObject.FindGameObjectsWithTag("Item");
         foreach (GameObject item in items)
         {
@@ -35,6 +36,7 @@ public class Inventory : MonoBehaviour
     }
     public void Reset()
     {
+        itemsInScene = new Dictionary<pickUpObjCode, GameObject>();
         items = new List<Item>();
         InventoryUI.instance.clear();
     }

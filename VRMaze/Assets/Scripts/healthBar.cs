@@ -22,7 +22,7 @@ public class healthBar : MonoBehaviour
     {
         instance = this;
         dead.enabled = false;
-        player = (Mouvement) GameObject.FindGameObjectWithTag("Player").GetComponent("Mouvement");
+        player = (Mouvement)GameObject.FindGameObjectWithTag("Player").GetComponent("Mouvement");
         spidersNb = player.spidersNb;
 
         HealthBar = GetComponent<Image>();
@@ -33,36 +33,43 @@ public class healthBar : MonoBehaviour
     public void resetHealthBar()
     {
         dead.enabled = false;
-        player = (Mouvement)GameObject.FindGameObjectWithTag("Player").GetComponent("Mouvement");
-        spidersNb = player.spidersNb;
+        player.spidersNb = 0;
 
         HealthBar = GetComponent<Image>();
-        fillAmount = HealthBar.fillAmount;
+        HealthBar.fillAmount = 1;
+        fillAmount = 1;
+
         died = false;
-        movement.enabled = true;
+        player.enabled = true;
 
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        fillAmount = HealthBar.fillAmount;
-        spidersNb = player.spidersNb;
-        print(spidersNb);
-        HealthBar.fillAmount -= 0.0005f*spidersNb;
+        if (player.enabled)
+        {
+            fillAmount = HealthBar.fillAmount;
+            spidersNb = player.spidersNb;
+            print(spidersNb);
+            HealthBar.fillAmount -= 0.0005f * spidersNb;
 
-        if (HealthBar.fillAmount == 0){
-            if (!died){
-                died = true;
-                time = Time.time;
-            }
-            dead.enabled =  true;
-            if (Time.time > 3 + time) {
-                movement.enabled = false;
+            if (HealthBar.fillAmount == 0)
+            {
+                if (!died)
+                {
+                    died = true;
+                    time = Time.time;
+                }
+                dead.enabled = true;
+                player.enabled = false;
+
+                // if (Time.time > 3 + time) {
                 //TODO in same scene for restarting
                 //SceneManager.LoadScene("GameOver");
             }
         }
-        
     }
+
+
 }

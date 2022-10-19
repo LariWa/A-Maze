@@ -39,5 +39,7 @@ public class InventorySlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
+        btn.color = neutral;
+
     }
 }

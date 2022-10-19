@@ -28,7 +28,6 @@ public class MazeGenerator : MonoBehaviour
     Transform initPosPlayer;
 
     public SoundManager soundManager;
-    public Transform rightController;
 
 
     // Start is called before the first frame update
@@ -236,17 +235,11 @@ public class MazeGenerator : MonoBehaviour
         }
         generateMaze();
         sendToClient();
-        Debug.Log(initPosPlayer.transform.position);
         player.position = Vector3.zero;
         player.rotation = Quaternion.identity;
-        Debug.Log(initPosPlayer.transform.position);
 
         // remove all weapons from player
-        foreach (Transform child in rightController)
-        {
-            if (child.gameObject.name != "XRControllerRight")
-                Destroy(child.gameObject);
-        }
+        ObjManager.instance.Reset();
 
         //reset health bar
         healthBar.instance.resetHealthBar();
