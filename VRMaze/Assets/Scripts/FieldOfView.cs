@@ -139,7 +139,7 @@ public class FieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == sword.name){
+        if (other.gameObject.tag == "Weapon"){
             lifeBar.value -= 0.3f;
             if (lifeBar.value <= 0)
             {
