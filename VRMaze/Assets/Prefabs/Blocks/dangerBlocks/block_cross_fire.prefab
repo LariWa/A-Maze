@@ -1009,6 +1009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 454435595417487715, guid: e405576670538954fbf24db190b79266, type: 3}
+      propertyPath: m_TagString
+      value: Spider
+      objectReference: {fileID: 0}
     - target: {fileID: 454435595825675570, guid: e405576670538954fbf24db190b79266, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.24
@@ -1141,3 +1145,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &1493684720984870605
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198033155702912534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.40689605
+  m_Height: 1.7828288
+  m_Direction: 2
+  m_Center: {x: 0.09816035, y: 0.010800403, z: 0.67214847}

@@ -23,5 +23,6 @@ public enum actionTypeCode
 public enum pickUpObjCode
 {
     TORCH=1,
-    SWORD=2
+    SWORD=2,
+    MORNINGSTAR=3
 }
