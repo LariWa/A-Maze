@@ -271,7 +271,7 @@ MonoBehaviour:
   mazeBlocksToGenerate:
   - quantity: 3
     prefab: {fileID: 7922877679255181227, guid: 7b92269ed574c4666aa764569ce37769, type: 3}
-  - quantity: 3
+  - quantity: 5
     prefab: {fileID: 8072762411319975446, guid: 05a219de03de540848bdfd36c944e2d8, type: 3}
   - quantity: 2
     prefab: {fileID: 5373006901187893563, guid: 34fa88e378be449f785e27d74d49e2b4, type: 3}
@@ -287,10 +287,6 @@ MonoBehaviour:
     prefab: {fileID: 640197508615098220, guid: 6331a5e573a5be943a9227da89b3a960, type: 3}
   - quantity: 3
     prefab: {fileID: 8401153851160937406, guid: 72f8d24fc5049e7448bdfec9fea04488, type: 3}
-  - quantity: 1
-    prefab: {fileID: 8072762411319975446, guid: aa89d8cf7afff5aff85dda4967400326, type: 3}
-  - quantity: 2
-    prefab: {fileID: 640197508615098220, guid: 6331a5e573a5be943a9227da89b3a960, type: 3}
   moveTime: 0.8
   playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
