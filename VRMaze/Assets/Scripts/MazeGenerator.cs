@@ -21,7 +21,7 @@ public class MazeGenerator : MonoBehaviour
     public float moveTime = 5.0f;
     Net_MazeGenerationMsg msg;
     Transform nextBlock;
-    public GameObject playerBlock, finishBlock, dangerBlock, cornerBlock;
+    public GameObject playerBlock, finishBlock, dangerBlock, cornerBlock, riddleBlock;
     public static MazeGenerator instance { get; private set; }
     public GameObject wall;
     public Transform player;
@@ -57,8 +57,12 @@ public class MazeGenerator : MonoBehaviour
                 if (idxAllMazeBlocks < columnLength * rowLength - 2)
                 {
                     if (idxAllMazeBlocks == 5) {
-                        allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
-                    } else {
+                        allMazeBlocks[idxAllMazeBlocks] = dangerBlock;
+                    }
+                    else if (idxAllMazeBlocks == 1) {
+                        allMazeBlocks[idxAllMazeBlocks] = riddleBlock;
+                    } 
+                    else {
                         allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
                     }
                     idxAllMazeBlocks++;
