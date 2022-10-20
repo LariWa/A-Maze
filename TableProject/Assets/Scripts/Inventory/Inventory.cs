@@ -25,6 +25,7 @@ public class Inventory : MonoBehaviour
         var items = GameObject.FindGameObjectsWithTag("Item");
         foreach (GameObject item in items)
         {
+            Debug.Log(item.GetComponent<ItemPickup>().item.objCode);
             itemsInScene.Add(item.GetComponent<ItemPickup>().item.objCode, item);
         }
     }
