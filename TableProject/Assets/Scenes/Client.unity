@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658822, g: 0.49642307, b: 0.5748253, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -906,15 +906,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mazeBlocksToGenerate:
   - {fileID: 2686856401831875769, guid: cbd66a30135984a00b104c98efe7329d, type: 3}
-  - {fileID: 3981652969568471002, guid: 84518d0f0168142f784ee44d874372bf, type: 3}
+  - {fileID: 3981652969568471002, guid: 2eccee5facd440743b8ba52998d932c4, type: 3}
   - {fileID: 2680434698124455456, guid: 71487f8138f374f3fa5b0b0cf524a3c7, type: 3}
   - {fileID: 6228477852510775571, guid: e865cf6e1cd584da1afe2de082a6c961, type: 3}
-  - {fileID: 5041885246322666046, guid: cc59d39775785485584d89a81a56f787, type: 3}
+  - {fileID: 5195659566761189520, guid: cc59d39775785485584d89a81a56f787, type: 3}
   - {fileID: 4062607295306112753, guid: 924e8db5bf77c47c093e886de8760117, type: 3}
   - {fileID: 2734951020711408795, guid: 219355ae7c809428c9044205cdd150d1, type: 3}
-  - {fileID: 3981652969568471002, guid: 84518d0f0168142f784ee44d874372bf, type: 3}
-  playerBlock: {fileID: 5037515869671953104, guid: 63d0f4abe0672424db59318a3dde4de2, type: 3}
-  finishBlock: {fileID: 911363036348541477, guid: 10cc9b5af4c4c44ce909c75a61b1e01c, type: 3}
+  - {fileID: 3981652969568471002, guid: 2eccee5facd440743b8ba52998d932c4, type: 3}
+  - {fileID: 2686856401831875769, guid: cbd66a30135984a00b104c98efe7329d, type: 3}
+  - {fileID: 3981652969568471002, guid: c65475f9913835c4ebdd6312ef2be56c, type: 3}
+  - {fileID: 3981652969568471002, guid: 2eccee5facd440743b8ba52998d932c4, type: 3}
+  playerBlock: {fileID: 7535883652494625344, guid: 6878e2aef576ca545b00f741709b78d4, type: 3}
+  finishBlock: {fileID: 3843530596209801934, guid: 338a8f6594ddc984687594eb3cd3532b, type: 3}
   cornerBlock: {fileID: 2686856401831875769, guid: cbd66a30135984a00b104c98efe7329d, type: 3}
   moveTime: 2
   btnPrefab: {fileID: 7373323298163969320, guid: e00e7616c56310643a376336e226b3c3, type: 3}
@@ -1068,7 +1071,7 @@ Transform:
   m_Children:
   - {fileID: 1994029769}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &863530280
 MonoBehaviour:
@@ -1084,6 +1087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAnswer: {fileID: 570160803}
   window: {fileID: 1994029772}
+  server: {fileID: 0}
 --- !u!1 &950170698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,6 +1805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAnswer: {fileID: 570160803}
   window: {fileID: 1994029772}
+  server: {fileID: 0}
 --- !u!1 &1527259228
 GameObject:
   m_ObjectHideFlags: 0

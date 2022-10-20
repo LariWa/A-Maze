@@ -38,6 +38,8 @@ public class MazeGenerator : MonoBehaviour
         PositionManager.instance.player = mazeBlocks[0, 0].transform.Find("Player");
         mazeBlocks[rowLength - 1, columnLength - 1] = Instantiate(finishBlock, new Vector3((rowLength - 1) * blockWidth, 0, (columnLength - 1) * blockWidth), Quaternion.identity, transform).transform;
         enemies = new GameObject[columnLength * rowLength];
+        Debug.Log(blockRotations.Length);
+        Debug.Log(blockIdxs.Length);
         //place blocks on grid
         for (int i = 1; i < columnLength * rowLength - 1; i++)
         {
@@ -55,6 +57,7 @@ public class MazeGenerator : MonoBehaviour
 
             else
             {
+                Debug.Log(blockIdxs[i - 1]);
                 GameObject block = Instantiate(mazeBlocksToGenerate[blockIdxs[i - 1]], pos, Quaternion.Euler(0, blockRotations[i - 1] * 90, 0), transform);
                 mazeBlocks[i / columnLength, i % columnLength] = block.transform;
                 if (block.transform.Find("enemy"))

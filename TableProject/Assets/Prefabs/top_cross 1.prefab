@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4326407741551828320}
   m_Layer: 0
-  m_Name: top_cross
+  m_Name: top_cross 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
