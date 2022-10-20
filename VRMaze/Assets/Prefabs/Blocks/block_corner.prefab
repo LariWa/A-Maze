@@ -200,7 +200,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1395741282731550156}
+  - {fileID: 8607994655697802358}
   - {fileID: 2505516614623594463}
   - {fileID: 8057880069726537035}
   - {fileID: 7601026816470669428}
@@ -218,7 +218,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.2, z: 0.5}
+  m_Size: {x: 0.8, y: 1.2, z: 0.8}
   m_Center: {x: -0.75, y: 0.6, z: -0.75}
 --- !u!65 &3878064804429143448
 BoxCollider:
@@ -231,7 +231,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.2, z: 0.5}
+  m_Size: {x: 2.3, y: 1.2, z: 0.8}
   m_Center: {x: 0, y: 0.6, z: 0.75}
 --- !u!65 &6855833841680910847
 BoxCollider:
@@ -257,7 +257,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.2, z: 2}
+  m_Size: {x: 0.8, y: 1.2, z: 2.3}
   m_Center: {x: 0.75, y: 0.6, z: 0}
 --- !u!65 &7128952586149493960
 BoxCollider:
@@ -368,7 +368,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &1500844574349885991
+--- !u!1001 &8142232102694908829
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -419,22 +419,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -3839900353044409315, guid: 47479e043fbe843acb04d12d38f247ec, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2ebca5d9efbb644829828c73224dbcab, type: 2}
-    - target: {fileID: 172633216588277708, guid: 47479e043fbe843acb04d12d38f247ec, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d85024c6dcd344dfeb7ab8651fc05c00, type: 2}
     - target: {fileID: 919132149155446097, guid: 47479e043fbe843acb04d12d38f247ec, type: 3}
       propertyPath: m_Name
-      value: corner_fixed (1)
+      value: corner_fixed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47479e043fbe843acb04d12d38f247ec, type: 3}
---- !u!4 &1395741282731550156 stripped
+--- !u!4 &8607994655697802358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 47479e043fbe843acb04d12d38f247ec, type: 3}
-  m_PrefabInstance: {fileID: 1500844574349885991}
+  m_PrefabInstance: {fileID: 8142232102694908829}
   m_PrefabAsset: {fileID: 0}
