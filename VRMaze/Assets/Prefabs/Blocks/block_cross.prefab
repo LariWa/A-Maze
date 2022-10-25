@@ -5499,7 +5499,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6390024860930766139, guid: 782e35f489efb4115ae63dae070f92bf, type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390024860930766139, guid: 782e35f489efb4115ae63dae070f92bf, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 952496312883926537, guid: 782e35f489efb4115ae63dae070f92bf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 782e35f489efb4115ae63dae070f92bf, type: 3}
 --- !u!4 &5690491921927466349 stripped
 Transform:

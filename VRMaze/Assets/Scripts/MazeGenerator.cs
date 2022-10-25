@@ -127,7 +127,7 @@ public class MazeGenerator : MonoBehaviour
         wallDown.transform.localScale = new Vector3(rowLength * blockWidth, blockHeight, 0.01f);
         wallDown.transform.position = new Vector3(((float)(rowLength * blockWidth) / 2) - blockWidth / 2, blockHeight / 2, -blockWidth / 2);
         Vector3 eulerRotation = transform.rotation.eulerAngles;
-        wallDown.transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 180);
+        //wallDown.transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 180);
 
         var wallUp = Instantiate(wall, transform);
         wallUp.transform.localScale = new Vector3(rowLength * blockWidth, blockHeight, 0.01f);
