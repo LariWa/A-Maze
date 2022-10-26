@@ -290,9 +290,9 @@ MonoBehaviour:
   moveTime: 0.8
   playerBlock: {fileID: 1850735528615957427, guid: bb85ad9a273fa456a898825de91dd44e, type: 3}
   finishBlock: {fileID: 7522178113193620108, guid: a75c174b3f21f4422b713fab4addfa54, type: 3}
-  dangerBlock: {fileID: 8072762411319975446, guid: 7324c7573b39c9678a766882319d14ee, type: 3}
+  dangerBlock: {fileID: 8072762411319975446, guid: 3597f2eeb7522ab2e84fff4651a322fe, type: 3}
   cornerBlock: {fileID: 7922877679255181227, guid: 7b92269ed574c4666aa764569ce37769, type: 3}
-  riddleBlock: {fileID: 8072762411319975446, guid: aa89d8cf7afff5aff85dda4967400326, type: 3}
+  riddleBlock: {fileID: 8072762411319975446, guid: 41dde984a823229fa8aa0eaef8680086, type: 3}
   wall: {fileID: 4481045484287973145, guid: f69d564fb93066a46afe90de624be8ef, type: 3}
   player: {fileID: 2017490933}
   soundManager: {fileID: 1950046032}

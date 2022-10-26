@@ -26,7 +26,7 @@ public class Net_FoundRiddleMsg : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteFixedString128(RiddleMessage);
     }
     public override void Deserialize(DataStreamReader reader)

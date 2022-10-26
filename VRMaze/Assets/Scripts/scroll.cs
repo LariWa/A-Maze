@@ -10,19 +10,25 @@ public class scroll : MonoBehaviour
     public RiddleBlock riddleRoom;
     
     private MeshRenderer mesh;
+    private Transform trans;
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.SetActive(false);
+        mesh = GetComponent<MeshRenderer>();
+        trans = GetComponent<Transform>();
+        mesh.enabled = false;
+        trans.GetChild(0).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {   
         if (RiddleBlock.instance.playerPosStatus == 2) {
-            this.gameObject.SetActive(true);
+            mesh.enabled = true;
+            trans.GetChild(0).gameObject.SetActive(true);
         } else {
-            this.gameObject.SetActive(false);
+            mesh.enabled = false;
+            trans.GetChild(0).gameObject.SetActive(false);
         }
         
     }

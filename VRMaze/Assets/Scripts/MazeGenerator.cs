@@ -56,8 +56,11 @@ public class MazeGenerator : MonoBehaviour
             {
                 if (idxAllMazeBlocks < columnLength * rowLength - 2)
                 {
-                        allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
-                   
+                        //if (i == 1) {
+                        //    allMazeBlocks[idxAllMazeBlocks] = dangerBlock;
+                        //} else {
+                            allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
+                        //}
                     idxAllMazeBlocks++;
                 }
                 else

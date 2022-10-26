@@ -32,7 +32,7 @@ public class Net_RiddleAnswerMsg : NetMessage
     }
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)Code);
+        writer.WriteInt((int)Code);
         writer.WriteFixedString128(RiddleMessage);
         writer.WriteInt(isCorrectAnswer);
     }
@@ -45,13 +45,12 @@ public class Net_RiddleAnswerMsg : NetMessage
     public override void ReceivedOnServer()
     {
         Debug.Log("SERVER:" + RiddleMessage);
-        Debug.Log("Answer : "+ this.isCorrectAnswer);
-        RiddleBlock.instance.openDoors();
+        if (this.isCorrectAnswer == 1){
+            RiddleBlock.instance.openDoors();
+        }
     }
     public override void ReceivedOnClient()
     {
         Debug.Log("Client:" + RiddleMessage);
-        Debug.Log("Answer : "+ this.isCorrectAnswer);
-        RiddleBlock.instance.openDoors();
     }
 }
