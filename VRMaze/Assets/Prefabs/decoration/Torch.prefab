@@ -303,10 +303,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fa16835cadea24aa43fad2c0bdd71b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minIntensity: 1
-  maxIntensity: 2
-  minRange: 1
-  maxRange: 2
+  minIntensity: 3
+  maxIntensity: 4
+  minRange: 0.7
+  maxRange: 1
   time: 0.1
 --- !u!1 &2802700162201204968
 GameObject:
@@ -14929,7 +14929,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3200409961470549869}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ef3d2bd84216a5e42991ed4f95866349, type: 3}
