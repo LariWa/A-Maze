@@ -18,6 +18,7 @@ public class FieldOfView : MonoBehaviour
 
     public bool canSeePlayer ;
     public int discoverPlayer = 0;
+    public static int nbSpidersFollowing = 0;
     public PathCreator pathCreator;
     Animation animations;
     public float distanceToTarget;
@@ -74,12 +75,14 @@ public class FieldOfView : MonoBehaviour
                     canSeePlayer = false;
                     discoverPlayer = 0;
                     soundManager.Stop("chase");
+                    nbSpidersFollowing--;
                 }
             }
             else{
                 canSeePlayer = false;
                 discoverPlayer = 0;
                 soundManager.Stop("chase");
+                nbSpidersFollowing--;
             }
         }
         else if (canSeePlayer)
@@ -87,6 +90,7 @@ public class FieldOfView : MonoBehaviour
             canSeePlayer = false;
             discoverPlayer = 0;
             soundManager.Stop("chase");
+            nbSpidersFollowing--;
         }
 
 
@@ -99,6 +103,7 @@ public class FieldOfView : MonoBehaviour
         {
             soundManager.Play("scream");
             soundManager.Play("chase");
+            nbSpidersFollowing++;
             discoverPlayer = 2;
         }
 
@@ -144,6 +149,12 @@ public class FieldOfView : MonoBehaviour
             if (lifeBar.value <= 0)
             {
                // animations.Play("Spider_Armature|die");
+                //Stop the chasing music if no more spiders are following the player
+                nbSpidersFollowing--;
+                if (nbSpidersFollowing <= 0) {
+                    soundManager.Stop("chase");
+                }
+
                 WaitForAnimation(animations);
                 Destroy(this.gameObject);
             }

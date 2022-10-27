@@ -59,7 +59,7 @@ public class MazeGenerator : MonoBehaviour
                         //if (i == 1) {
                         //    allMazeBlocks[idxAllMazeBlocks] = dangerBlock;
                         //} else {
-                            allMazeBlocks[idxAllMazeBlocks] = mazeBlock.prefab;
+                            allMazeBlocks[idxAllMazeBlocks] = dangerBlock;
                         //}
                     idxAllMazeBlocks++;
                 }

@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.spatialBlend = s.spatialBlend;
         }
 
         theme = Array.Find(sounds, sound => sound.name == "spooky");

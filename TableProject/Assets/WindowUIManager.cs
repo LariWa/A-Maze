@@ -32,8 +32,8 @@ public class WindowUIManager : MonoBehaviour
     public void OnClickAnswer()
     {
         server = FindObjectOfType<BaseServer>(); 
-        if (inputAnswer.text == "piou") {
-            Net_RiddleAnswerMsg msg = new Net_RiddleAnswerMsg(inputAnswer.text == "piou");
+        if (inputAnswer.text == "nose") {
+            Net_RiddleAnswerMsg msg = new Net_RiddleAnswerMsg(true);
             BaseClient.instance.SendToServer(msg);
             this.window.gameObject.SetActive(false);
         } else {
