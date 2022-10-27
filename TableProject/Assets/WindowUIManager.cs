@@ -29,6 +29,13 @@ public class WindowUIManager : MonoBehaviour
         server = FindObjectOfType<BaseServer>();  
     }
 
+    public void Reset()
+    {
+        inputAnswer.text = "";
+        this.window.gameObject.SetActive(false);
+
+
+    }
     public void OnClickAnswer()
     {
         server = FindObjectOfType<BaseServer>(); 
