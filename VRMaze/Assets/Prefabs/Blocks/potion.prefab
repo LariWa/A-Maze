@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8807567143651933459, guid: b56fe0fb60e2bda4cbca31ee878a7307, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8807567143651933459, guid: b56fe0fb60e2bda4cbca31ee878a7307, type: 3}
       propertyPath: m_LocalPosition.z
@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7922877679255181227, guid: 7b92269ed574c4666aa764569ce37769, type: 3}
       propertyPath: m_Name
-      value: block_corner Variant
+      value: potion
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b92269ed574c4666aa764569ce37769, type: 3}
