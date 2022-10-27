@@ -16,7 +16,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
-    public bool canSeePlayer ;
+    public bool canSeePlayer;
     public int discoverPlayer = 0;
     public static int nbSpidersFollowing = 0;
     public PathCreator pathCreator;
@@ -36,19 +36,20 @@ public class FieldOfView : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
         // playerRef = GameObject.FindGameObjectWithTag("Player");
         //pathCreator = (PathCreator) GetComponent("PathCreator");
-/*        StartCoroutine(FOVRoutine());
-*/    }
+        /*        StartCoroutine(FOVRoutine());
+        */
+    }
 
-/*    private IEnumerator FOVRoutine()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
-
-        while (true)
+    /*    private IEnumerator FOVRoutine()
         {
-            yield return wait;
-            FieldOfViewCheck();
-        }
-    }*/
+            WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+            while (true)
+            {
+                yield return wait;
+                FieldOfViewCheck();
+            }
+        }*/
 
     private void Update()
     {
@@ -67,18 +68,21 @@ public class FieldOfView : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
                     canSeePlayer = true;
-                    if (discoverPlayer == 0) {
+                    if (discoverPlayer == 0)
+                    {
                         discoverPlayer = 1;
                     }
                 }
-                else {
+                else
+                {
                     canSeePlayer = false;
                     discoverPlayer = 0;
                     soundManager.Stop("chase");
                     nbSpidersFollowing--;
                 }
             }
-            else{
+            else
+            {
                 canSeePlayer = false;
                 discoverPlayer = 0;
                 soundManager.Stop("chase");
@@ -97,7 +101,7 @@ public class FieldOfView : MonoBehaviour
 
         /*        material =GetComponent<Renderer>().material;
         */
-        animations =GetComponent<Animation>();
+        animations = GetComponent<Animation>();
         //Scream if it's the spider's first time seeing the player 
         if (discoverPlayer == 1)
         {
@@ -114,24 +118,25 @@ public class FieldOfView : MonoBehaviour
             */
             //animations.Play("Spider_Armature_run_ani_attack");
 
-            if (distanceToTarget > 0.3f){
-                
-                transform.position += new Vector3(directionToTarget.x/300, 0, directionToTarget.z/300) ;
+            if (distanceToTarget > 0.3f)
+            {
+
+                transform.position += new Vector3(directionToTarget.x / 300, 0, directionToTarget.z / 300);
             }
 
-            float angle2 = Vector3.Angle(new Vector3(directionToTarget.x,0,directionToTarget.z), -transform.forward);
+            float angle2 = Vector3.Angle(new Vector3(directionToTarget.x, 0, directionToTarget.z), -transform.forward);
             if (angle2 > 2f || angle2 < -2f)
             {
-                transform.Rotate(0,angle2,0);
+                transform.Rotate(0, angle2, 0);
 
             }
-        //    animations.Play("Attack");
+            //    animations.Play("Attack");
         }
         else
         {
-           distance -= speed * Time.deltaTime;
-           transform.position = pathCreator.path.GetPointAtDistance(distance);
-           transform.rotation = pathCreator.path.GetRotationAtDistance(distance) ;
+            distance -= speed * Time.deltaTime;
+            transform.position = pathCreator.path.GetPointAtDistance(distance);
+            transform.rotation = pathCreator.path.GetRotationAtDistance(distance);
 
             // transform.rotation = Quaternion.Euler(0,diff,0);
             // transform.Rotate(0,diff,0);
@@ -139,29 +144,36 @@ public class FieldOfView : MonoBehaviour
         }
 
 
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Weapon"){
+        if (other.gameObject.tag == "Weapon")
+        {
             lifeBar.value -= 0.3f;
+            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+            ObjManager.instance.endVibrationInvoke();
+
             if (lifeBar.value <= 0)
             {
-               // animations.Play("Spider_Armature|die");
+                // animations.Play("Spider_Armature|die");
                 //Stop the chasing music if no more spiders are following the player
                 nbSpidersFollowing--;
-                if (nbSpidersFollowing <= 0) {
+                if (nbSpidersFollowing <= 0)
+                {
                     soundManager.Stop("chase");
                 }
-
+                ObjManager.instance.endVibrationInvoke();
                 WaitForAnimation(animations);
                 Destroy(this.gameObject);
+
+                BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z, id));
+
             }
-            BaseServer.instance.SendToClient(new Net_KillEnemyMsg(transform.position.x, transform.position.z, id));
         }
     }
-
+    
     private IEnumerator WaitForAnimation(Animation anim)
     {
         do
