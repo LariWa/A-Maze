@@ -48,7 +48,7 @@ public class Mouvement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 3 * walkspeed;
+            speed = 2 * walkspeed;
 
         }
 
