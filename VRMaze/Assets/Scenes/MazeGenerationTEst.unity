@@ -527,7 +527,7 @@ MonoBehaviour:
   - name: slideDoors
     clip: {fileID: 8300000, guid: 61943d9d8231523a6b40cea4a9913915, type: 3}
     volume: 0.269
-    pitch: 0.69
+    pitch: 1
     spatialBlend: 1
     source: {fileID: 0}
   theme:
