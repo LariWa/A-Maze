@@ -14,6 +14,8 @@ public class PickUpObj : MonoBehaviour
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             BaseServer.instance.SendToClient(new Net_ObjInteraction_MSg(objCode, true));
+            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+            ObjManager.instance.endVibrationInvoke();
             ObjManager.instance.add(this.gameObject);
         }
 

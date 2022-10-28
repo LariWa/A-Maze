@@ -55,8 +55,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1493684720984870605, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: MaxDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[1].time
+      value: 0.871978
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867910169673272142, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+--- !u!1 &880995552123479445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1368581480631674227, guid: 66c57365a3188db46964d41f5916555d, type: 3}
+  m_PrefabInstance: {fileID: 2217953901351420134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8059673185289409655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880995552123479445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fa16835cadea24aa43fad2c0bdd71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 6
+  maxIntensity: 7
+  minRange: 0.7
+  maxRange: 1
 --- !u!1001 &8712854055095734650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +125,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2342235782505241814, guid: 05a219de03de540848bdfd36c944e2d8, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4725528197278561248, guid: 05a219de03de540848bdfd36c944e2d8, type: 3}
       propertyPath: m_IsActive
       value: 0

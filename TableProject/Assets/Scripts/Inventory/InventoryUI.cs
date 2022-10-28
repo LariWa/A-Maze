@@ -38,6 +38,7 @@ public class InventoryUI : MonoBehaviour
         {
             slot.reset();
         }
+        index = 0;
     }
 
 }

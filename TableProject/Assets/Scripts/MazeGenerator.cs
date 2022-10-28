@@ -172,8 +172,7 @@ public class MazeGenerator : MonoBehaviour
 
             //reset inventory;
             Inventory.instance.Reset();
-
-            //TODO reset riddle canvases?
+            WindowUIManager.instance.Reset();
 
         }
         //if (Input.GetMouseButtonDown(0) && BaseClient.instance.isConnected)

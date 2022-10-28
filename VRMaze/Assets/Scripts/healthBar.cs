@@ -60,6 +60,8 @@ public class healthBar : MonoBehaviour
                 {
                     died = true;
                     time = Time.time;
+                    OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+
                 }
                 dead.enabled = true;
                 player.enabled = false;

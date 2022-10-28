@@ -44,4 +44,14 @@ public class ObjManager : MonoBehaviour
 
         }
     }
+    public void endVibrationInvoke()
+    {
+        Invoke("endVibration", 0.2f);
+
+    }
+     void endVibration()
+    {
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+
+    }
 }
