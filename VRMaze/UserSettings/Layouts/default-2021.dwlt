@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 96
+  controlID: 52
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 42
+  controlID: 53
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 43
+  controlID: 54
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,10 +187,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 257.6
-    height: 462.4
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    width: 310
+    height: 597
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -250,7 +250,7 @@ MonoBehaviour:
   - {fileID: 16}
   - {fileID: 17}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 4.6277003, y: -0.91624206, z: 2.8264248}
     speed: 2
-    m_Value: {x: 4.6277003, y: -0.91624206, z: 2.8264248}
+    m_Value: {x: 10.190572, y: -2.0483809, z: -0.8828049}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -551,13 +551,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.55978084, y: -0.031300597, z: 0.021171097, w: -0.8277827}
+    m_Target: {x: 0.0908852, y: 0.8357288, z: -0.14561027, w: 0.52163357}
     speed: 2
-    m_Value: {x: -0.559779, y: -0.031300493, z: 0.021171026, w: -0.82777995}
+    m_Value: {x: -0.019986445, y: -0.8302861, z: 0.029934116, w: -0.5561741}
   m_Size:
     m_Target: 6.1634445
     speed: 2
-    m_Value: 6.1634445
+    m_Value: 1.5361443
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -613,9 +613,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 96890000
-      m_LastClickedID: 35222
-      m_ExpandedIDs: 0287fdff3af1ffff42f1ffff52f1ffff14f4ffff608900007689000096890000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 06fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -772,22 +772,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Blocks/dangerBlocks
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Blocks/dangerBlocks
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Lari\Documents\GitHub\a-maze\VRMaze
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0.5999756}
-    m_SelectedIDs: b4880000
-    m_LastClickedID: 34996
-    m_ExpandedIDs: 00000000888800008a8800008c8800008e88000090880000928800009488000096880000988800009a8800009c8800009e880000e68800002289000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 129}
+    m_SelectedIDs: 4c880000
+    m_LastClickedID: 34892
+    m_ExpandedIDs: 00000000cc870000ce870000d0870000d2870000d4870000d687000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -815,7 +815,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 4e590000
     m_LastClickedID: 22862
-    m_ExpandedIDs: 00000000888800008a8800008c8800008e88000090880000928800009488000096880000988800009a8800009c8800009e880000
+    m_ExpandedIDs: 00000000cc870000ce870000d0870000d2870000d4870000d6870000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -929,7 +929,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 24798
+  m_LastSelectedObjectID: -10812
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52

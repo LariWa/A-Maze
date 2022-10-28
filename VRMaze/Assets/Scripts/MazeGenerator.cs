@@ -165,7 +165,6 @@ public class MazeGenerator : MonoBehaviour
             moveInPositiveDir(isRow, idx);
 
         soundManager.Play("slideDoors");
-
     }
     void moveInPositiveDir(bool isRow, int idx)//right or up
     {

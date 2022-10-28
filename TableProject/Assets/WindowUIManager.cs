@@ -8,6 +8,7 @@ public class WindowUIManager : MonoBehaviour
     public static WindowUIManager instance { get; private set; }
     public TMP_InputField inputAnswer;
     public Canvas window;
+    public GameObject errorMessage;
 
     public BaseServer server;
     // Start is called before the first frame update
@@ -44,6 +45,7 @@ public class WindowUIManager : MonoBehaviour
             BaseClient.instance.SendToServer(msg);
             this.window.gameObject.SetActive(false);
         } else {
+            this.errorMessage.SetActive(true);
             inputAnswer.text = "";
         }
     }
