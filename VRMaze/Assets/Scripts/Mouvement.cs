@@ -43,7 +43,7 @@ public class Mouvement : MonoBehaviour
         spidersNb = Physics.OverlapSphere(transform.position, 0.3f, spiderMask).Length;
 
 
-        float speed = walkspeed * (1f + 2f * OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger)) ;
+        float speed = walkspeed * (1f + OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger)) ;
         string animate;
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -108,23 +108,24 @@ public class Mouvement : MonoBehaviour
         }
 
 
-        Collider[] potions = Physics.OverlapSphere(transform.position, 0.1f, LayerMask.GetMask("Potion"));
-        if (potions.Length > 0)
-        {
-            HealthBar.fillAmount += 0.3f;
-            Destroy(potions[0].gameObject);
-            greenLight.Play();
-        }
+        //Collider[] potions = Physics.OverlapSphere(transform.position, 0.1f, LayerMask.GetMask("Potion"));
+        //if (potions.Length > 0)
+        //{
+        //    HealthBar.fillAmount += 0.3f;
+        //    Destroy(potions[0].gameObject);
+        //    greenLight.Play();
+        //}
     }
 
- /*   private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Potion")
         {
             HealthBar.fillAmount += 0.3f;
             Destroy(other.gameObject);
+            greenLight.Play();
         }
-    }*/
+    }
 
 
 }
