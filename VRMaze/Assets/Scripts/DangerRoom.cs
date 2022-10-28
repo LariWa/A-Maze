@@ -28,6 +28,9 @@ public class DangerRoom : MonoBehaviour
     // 2 : Entered the room and doors have been closed
     private int playerPosStatus = 0; 
 
+    public void doorSound() {
+        soundManager.Play("cellDoor");
+    }
     //Check if there is any live spider left
     private bool anySpiderRemaining() 
     {
