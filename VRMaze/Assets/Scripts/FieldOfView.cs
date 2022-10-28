@@ -153,7 +153,7 @@ public class FieldOfView : MonoBehaviour
         if (other.gameObject.tag == "Weapon")
         {
             if (isBoss){
-                lifeBar.value -= 0.001f;
+                lifeBar.value -= 0.06f;
             } else {
                 lifeBar.value -= 0.3f;
             }
