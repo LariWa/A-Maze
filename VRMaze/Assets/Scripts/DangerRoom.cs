@@ -13,6 +13,7 @@ public class DangerRoom : MonoBehaviour
     public float radius = 100000000;
 
     public GameObject playerRef;
+    public GameObject morningStar;
     public SoundManager soundManager;
     public Transform player;
     public List<GameObject> spiderList;
@@ -55,6 +56,7 @@ public class DangerRoom : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animations =GetComponent<Animation>();
+        this.morningStar.SetActive(false);
 
         //Initiate the spiders list :  
         //TODO : Mon dieu c'est dégeulasse, automatise had lkhra
@@ -77,14 +79,14 @@ public class DangerRoom : MonoBehaviour
 
         //Get the position of the block center
         Vector3 centerPosition = transform.Find("ground_cross").position;
-        float limitDist =  transform.Find("ground_cross").GetComponent<Renderer>().bounds.size[0];
+        float limitDist =  transform.Find("cross_fixed").GetComponent<Renderer>().bounds.size[0];
 
         //Check the distance of the player from the block center
         Vector3 playerPos = player.position;
         distanceToTarget = Vector3.Distance(playerPos, centerPosition);
 
         //If the distance is inferior to the threshold, activate the doors
-        if (distanceToTarget < limitDist/2){
+        if (distanceToTarget < limitDist/3){
 
             //Change playerpos status to has just entered the room
             if (playerPosStatus == 0) {
@@ -101,6 +103,7 @@ public class DangerRoom : MonoBehaviour
         //Open Doors when all spiders are killed
         if (!anySpiderRemaining() && playerPosStatus != 3) {
             playerPosStatus = 3;
+            this.morningStar.SetActive(true);
             animations.Play("openDoors");
         }
     }
