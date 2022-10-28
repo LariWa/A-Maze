@@ -5311,13 +5311,11 @@ MonoBehaviour:
     volume: 0.468
     pitch: 0.82
     spatialBlend: 0
-    spatialBlend: 0
     source: {fileID: 0}
   - name: scream
     clip: {fileID: 8300000, guid: 07bdc7040c4cf2f3ea637a74a43e1963, type: 3}
     volume: 0.503
     pitch: 1.12
-    spatialBlend: 0
     spatialBlend: 0
     source: {fileID: 0}
   - name: attackFootstep
@@ -5337,6 +5335,12 @@ MonoBehaviour:
     volume: 0.269
     pitch: 1.01
     spatialBlend: 0
+    source: {fileID: 0}
+  - name: slideDoors
+    clip: {fileID: 8300000, guid: 61943d9d8231523a6b40cea4a9913915, type: 3}
+    volume: 0.269
+    pitch: 0.69
+    spatialBlend: 1
     source: {fileID: 0}
   theme:
     name: spooky
