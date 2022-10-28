@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454435595417487715, guid: e405576670538954fbf24db190b79266, type: 3}
       propertyPath: m_Name
-      value: Fire
+      value: Fire Variant
       objectReference: {fileID: 0}
     - target: {fileID: 454435595417487715, guid: e405576670538954fbf24db190b79266, type: 3}
       propertyPath: m_Layer

@@ -96,7 +96,8 @@ public class DangerRoom : MonoBehaviour
         }
 
         //Open Doors when all spiders are killed
-        if (!anySpiderRemaining()) {
+        if (!anySpiderRemaining() && playerPosStatus != 3) {
+            playerPosStatus = 3;
             animations.Play("openDoors");
         }
     }
