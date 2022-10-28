@@ -10,6 +10,10 @@ public class PickUpObj : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Contains("Controller")    )    {
+            if (objCode == pickUpObjCode.TORCH)
+            {
+                GameObject.FindGameObjectWithTag("Intro").SetActive(false);
+            }
             transform.SetParent(other.gameObject.transform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
