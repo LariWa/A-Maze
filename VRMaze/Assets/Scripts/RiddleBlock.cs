@@ -40,7 +40,10 @@ public class RiddleBlock : MonoBehaviour
         animations =GetComponent<Animation>();
     }
 
-
+    public void doorSound() {
+        soundManager.Play("cellDoor");
+    }
+    
     public void openDoors(){
         animations.Play("openDoors");
         playerPosStatus = 3;
