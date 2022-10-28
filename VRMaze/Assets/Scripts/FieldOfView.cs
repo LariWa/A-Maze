@@ -17,6 +17,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask obstructionMask;
 
     public bool canSeePlayer;
+    public bool isBoss;
     public int discoverPlayer = 0;
     public static int nbSpidersFollowing = 0;
     public PathCreator pathCreator;
@@ -151,7 +152,11 @@ public class FieldOfView : MonoBehaviour
     {
         if (other.gameObject.tag == "Weapon")
         {
-            lifeBar.value -= 0.3f;
+            if (isBoss){
+                lifeBar.value -= 0.05f;
+            } else {
+                lifeBar.value -= 0.3f;
+            }
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
             ObjManager.instance.endVibrationInvoke();
 

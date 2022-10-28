@@ -1482,6 +1482,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 8882195815635485868}
     m_Modifications:
     - target: {fileID: 1883015103417067216, guid: b8731e5ddba7a6f4e8598d685dc844df, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883015103417067216, guid: b8731e5ddba7a6f4e8598d685dc844df, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 2215058339365322527}
