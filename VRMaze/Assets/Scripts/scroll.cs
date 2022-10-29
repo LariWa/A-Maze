@@ -18,18 +18,23 @@ public class scroll : MonoBehaviour
         trans = GetComponent<Transform>();
         mesh.enabled = false;
         trans.GetChild(0).gameObject.SetActive(false);
-        if (!RiddleBlock.instance) this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        if (RiddleBlock.instance.playerPosStatus == 2) {
-            mesh.enabled = true;
-            trans.GetChild(0).gameObject.SetActive(true);
-        } else {
-            mesh.enabled = false;
-            trans.GetChild(0).gameObject.SetActive(false);
+    {
+        if (RiddleBlock.instance)
+        {
+            if (RiddleBlock.instance.playerPosStatus == 2)
+            {
+                mesh.enabled = true;
+                trans.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            {
+                mesh.enabled = false;
+                trans.GetChild(0).gameObject.SetActive(false);
+            }
         }
         
     }

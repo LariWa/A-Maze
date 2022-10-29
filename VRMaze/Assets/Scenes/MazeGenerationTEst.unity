@@ -603,7 +603,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: cellDoor
     clip: {fileID: 8300000, guid: 3d6b8b20b172dfa948e1762f0e5d0504, type: 3}
-    volume: 0.269
+    volume: 0.475
     pitch: 1
     spatialBlend: 1
     source: {fileID: 0}
