@@ -595,6 +595,12 @@ MonoBehaviour:
     pitch: 1
     spatialBlend: 1
     source: {fileID: 0}
+  - name: cellDoor
+    clip: {fileID: 8300000, guid: 3d6b8b20b172dfa948e1762f0e5d0504, type: 3}
+    volume: 0.269
+    pitch: 1
+    spatialBlend: 1
+    source: {fileID: 0}
   theme:
     name: spooky
     clip: {fileID: 8300000, guid: 5af2a60ecf504dce9bd04a65d2c2bed3, type: 3}
@@ -1322,9 +1328,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2480277481280747447}
     m_Modifications:
+    - target: {fileID: 2089638894, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 168.8913
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089638894, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 42.901
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089638894, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.78398
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089638894, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15.11
+      objectReference: {fileID: 0}
     - target: {fileID: 2089638895, guid: 97039340b828068439e1911f597b3865, type: 3}
       propertyPath: m_text
-      value: What runs but has no legs?
+      value: I run yet I have no legs. What am I?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089638895, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_fontSize
+      value: 33.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089638895, guid: 97039340b828068439e1911f597b3865, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 33.66
       objectReference: {fileID: 0}
     - target: {fileID: 8553521934001270607, guid: 97039340b828068439e1911f597b3865, type: 3}
       propertyPath: m_Name
