@@ -8,6 +8,7 @@ public class ObjManager : MonoBehaviour
     public static ObjManager instance;
     public List<GameObject> objs = new List<GameObject>();
     public GameObject controllerModel;
+    public GameObject intro;
     void Start()
     {
         instance = this;
@@ -35,6 +36,7 @@ public class ObjManager : MonoBehaviour
         }
         objs = new List<GameObject>();
         controllerModel.SetActive(true);
+        intro.SetActive(true);
 
     }
     public void use(pickUpObjCode useObj)

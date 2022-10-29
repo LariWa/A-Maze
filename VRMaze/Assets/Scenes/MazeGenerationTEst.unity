@@ -184,6 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0776630e13609542a68c6bb1fbe9a19, type: 3}
+--- !u!1 &222590331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8553521934001270607, guid: 97039340b828068439e1911f597b3865, type: 3}
+  m_PrefabInstance: {fileID: 1696005141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &375456619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6903859628071554344, guid: 9d9d7cb28e225fe42826ba582745dfb2, type: 3}
@@ -328,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objs: []
   controllerModel: {fileID: 971687281}
+  intro: {fileID: 222590331}
 --- !u!4 &931723128
 Transform:
   m_ObjectHideFlags: 0
@@ -693,8 +699,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.09545724, y: 0.07702581, z: 0.07905073}
-  m_Center: {x: 0.00000005122274, y: -0.011468115, z: -0.014490341}
+  m_Size: {x: 0.09545724, y: 0.07702581, z: 0.111665964}
+  m_Center: {x: 0.00000005122274, y: -0.0114681125, z: 0.0018172618}
 --- !u!4 &283585283896977180
 Transform:
   m_ObjectHideFlags: 0
@@ -1199,15 +1205,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8067484485030640882, guid: 9d9d7cb28e225fe42826ba582745dfb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9396927
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8067484485030640882, guid: 9d9d7cb28e225fe42826ba582745dfb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3420201
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8067484485030640882, guid: 9d9d7cb28e225fe42826ba582745dfb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8067484485030640882, guid: 9d9d7cb28e225fe42826ba582745dfb2, type: 3}
       propertyPath: m_ConstrainProportionsScale

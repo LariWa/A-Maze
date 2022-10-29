@@ -18,6 +18,7 @@ public class scroll : MonoBehaviour
         trans = GetComponent<Transform>();
         mesh.enabled = false;
         trans.GetChild(0).gameObject.SetActive(false);
+        if (!RiddleBlock.instance) this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
