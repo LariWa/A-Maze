@@ -14743,7 +14743,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7553632549715944439}
   - component: {fileID: 7553632549715944440}
-  - component: {fileID: 7553632549715944438}
   - component: {fileID: 7210495076543659510}
   m_Layer: 0
   m_Name: Point Light
@@ -14760,7 +14759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7553632549715944441}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.002676047, y: -0.0030167731, z: 1.1310467}
+  m_LocalPosition: {x: 0.95, y: 0.92, z: -0.22}
   m_LocalScale: {x: 0.7421151, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14779,8 +14778,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9622642, g: 0.83653724, b: 0.22241013, a: 1}
-  m_Intensity: 0.10311068
-  m_Range: 3
+  m_Intensity: 3
+  m_Range: 0.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -14829,26 +14828,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!95 &7553632549715944438
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7553632549715944441}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ed455451da5fe0c458b587b5630cb45b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7210495076543659510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14863,8 +14842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minIntensity: 3
   maxIntensity: 4
-  minRange: 0.7
-  maxRange: 1
+  minRange: 0.3
+  maxRange: 0.5
 --- !u!1 &7553632549723715400
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2472446609054620763, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
+      propertyPath: maxRange
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472446609054620763, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
+      propertyPath: minRange
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2764141918418126481, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
       propertyPath: m_IsActive
       value: 1
