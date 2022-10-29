@@ -5,11 +5,12 @@ using UnityEngine;
 public class PickUpObj : MonoBehaviour
 {
     public pickUpObjCode objCode;
-
+    
   
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Contains("Controller")    )    {
+
             if (objCode == pickUpObjCode.TORCH)
             {
                 ObjManager.instance.intro.SetActive(false);
@@ -21,6 +22,7 @@ public class PickUpObj : MonoBehaviour
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
             ObjManager.instance.endVibrationInvoke();
             ObjManager.instance.add(this.gameObject);
+            this.enabled = false;
         }
 
     }
