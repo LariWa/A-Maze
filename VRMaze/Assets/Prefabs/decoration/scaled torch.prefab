@@ -119,5 +119,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: scaled torch
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2472446609054620763, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
