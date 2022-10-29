@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.087346524
       objectReference: {fileID: 0}
+    - target: {fileID: 977062102521659286, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cc9d23c742e5b46429384c44344bba36, type: 2}
     - target: {fileID: 1442484350669657400, guid: 4c7f264a1e4be23439f2afc085f06183, type: 3}
       propertyPath: m_Enabled
       value: 0
