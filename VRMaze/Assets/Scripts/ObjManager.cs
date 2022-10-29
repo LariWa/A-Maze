@@ -7,6 +7,7 @@ public class ObjManager : MonoBehaviour
     // Start is called before the first frame update
     public static ObjManager instance;
     public List<GameObject> objs = new List<GameObject>();
+    public GameObject controllerModel;
     void Start()
     {
         instance = this;
@@ -24,6 +25,7 @@ public class ObjManager : MonoBehaviour
             obj.SetActive(false);
         }
         objs.Add(newObj);
+        controllerModel.SetActive(false);
     }
     public void Reset()
     {
@@ -32,6 +34,8 @@ public class ObjManager : MonoBehaviour
             Destroy(obj);
         }
         objs = new List<GameObject>();
+        controllerModel.SetActive(true);
+
     }
     public void use(pickUpObjCode useObj)
     {
