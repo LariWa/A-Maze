@@ -6,4 +6,10 @@ The first player is inside a maze in VR using the Oculus Quest 2, while the seco
 
 
 
-[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/40071882/199948656-94934a45-4513-4419-8b80-02dd6270fdbb.png)](https://youtu.be/n453EWs7aug)
+
+
+
+
+
+https://user-images.githubusercontent.com/40071882/200511851-67fab956-1f6d-4d3a-a319-f860637c149b.mp4
+
